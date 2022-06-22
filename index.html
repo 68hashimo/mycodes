@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>test</title>
+    <link rel="stylesheet" href="pr1.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">例の部屋</h1>
+      <p class="note">
+        Change Room mode (before join in a room):
+        <a href="#">mesh</a> / <a href="#sfu">sfu</a>
+      </p>
+      <div class="room">
+        <div class="remote-streams" id="js-remote-streams"></div>
+        <div>
+          <video id="js-local-stream"></video>
+          <span id="js-room-mode"></span>:
+          <input type="text" placeholder="Room Name" id="js-room-id">
+          <button id="js-join-trigger">参加</button>
+          <button id="js-leave-trigger">退出</button>
+       </div>
+
+    
+        <div><!---チャット-->
+          
+          <pre class="messages" id="js-messages"></pre>
+          <input type="text" id="js-local-text">
+          <button id="js-send-trigger">送る</button>
+        </div>
+
+        <div>
+            <!----ここからミュート機能-->
+          <button type="button" name="camera" id="camera-button" >カメラoff</button>
+          <button type="button" name="cameraon"id="camera-on">カメラon</button>
+          <button type="button" name="micmute" id="mic-mute">マイクミュート</button>
+          <button type="button" name="micon" id="mic-on">マイクミュート解除</button>
+
+        </div>
+
+        <div><!--文字起こし-->
+          <button id="btn">文字起こし</button>
+          <div id="content"></div>
+    
+
+          <script>
+        
+              const speech = new webkitSpeechRecognition();
+              speech.lang = 'ja-JP';
+          
+              const btn = document.getElementById('btn');
+              const content = document.getElementById('content');
+          
+              btn.addEventListener('click' , function() {
+              // 音声認識をスタート
+              speech.start();
+              });
+          
+              //---------------追記---------------//
+              //音声自動文字起こし機能
+              
+              speech.onresult = function(e) {
+                  speech.stop();
+                  if(e.results[0].isFinal){
+                      var autotext =  e.results[0][0].transcript
+                      console.log(e);
+                      console.log(autotext);
+                      content.innerHTML += '<div>'+ autotext +'</div>';
+                    }
+              }
+              
+          
+              speech.onend = () => { 
+                  speech.start() 
+              };
+              //--------------------------------//
+          
+          </script>
+       </div>
+      </div>
+      <p class="meta" id="js-meta"></p>
+    </div>
+    <div>
+      
+    </div>
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script>
+    <script src="../_shared/key.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+    <script src="./script1.js"></script>
+    <script src="./mjs.js"></script>
+  </body>
+</html>
