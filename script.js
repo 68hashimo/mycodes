@@ -148,7 +148,8 @@ const Peer = window.Peer;
       return;
     }
 
-    const room = peer.joinRoom(roomId.value, {
+    const room = peer.joinRoom("roomId", {
+      //roomId.valueが元値
       mode: getRoomModeByHash(),
       stream: localStream,
     });
