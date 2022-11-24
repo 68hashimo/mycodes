@@ -1,5 +1,6 @@
 function GCookies()
 {
+    console.log("gcookie");
     let list=[];
     var r = document.cookie.split(';'); 
     r.forEach(function(value) { 
@@ -12,9 +13,10 @@ function GCookies()
 
 
 function speechm(te){
-    content.innerHTML += "test"
+    //content.innerHTML += "test"
     //const ls=["こんにちは","おはよう","漢字"];
     var ls=GCookies()
+    console.log(ls,te);
     if(ls==""){
         return;
     }
