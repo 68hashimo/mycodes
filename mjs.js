@@ -55,3 +55,10 @@ window.onload = function(){
     var text1=data1.split("=")[1];
     document.getElementById("js-room-id").value=text1;
 }
+
+
+//get cookie test
+function Cookies()
+{
+    console.log(GCookies());
+} 

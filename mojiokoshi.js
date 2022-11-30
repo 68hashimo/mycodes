@@ -15,7 +15,7 @@ function GCookies()
 function speechm(te){
     //content.innerHTML += "test"
     //const ls=["こんにちは","おはよう","漢字"];
-    var ls=GCookies()
+    var ls=GCookies();
     console.log(ls,te);
     if(ls==""){
         return;

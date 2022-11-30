@@ -10,6 +10,10 @@
     <div class="container">
       <a href="top.html">top</a><br>
       <a href="get_cok.html">語句を登録</a>
+      <button id="t_cok" onclick="Cookies()">登録されている語句を表示</button>
+      <div id = t_cok>
+
+      </div>
       <div id="msg">
         
       </div>
@@ -74,6 +78,7 @@
                       console.log(e);
                       console.log(autotext);
                       content.innerHTML += '<div>'+ autotext +'</div>';
+                      speechm(autotext);
                     }
               }
               
