@@ -89,6 +89,28 @@
               //--------------------------------//
           
           </script>
+
+          <script type="text/javascript">
+            var now = new Date();
+            function LoadProc() {
+              var target = document.getElementById("DateTimeDisp");
+
+              var Hour = now.getHours();
+              var Min = now.getMinutes();
+
+
+              target.innerHTML =Hour + ":" + Min;
+            }
+
+          </script>
+
+          <table>
+          <tr>
+          <td><button type="button" id="notif" onclick="return notif()"><img src="good.png" width="30" height="30"></button></td>
+          <td><button type="button" id="notif" onclick="return notif2()"><img src="change.png" width="30" height="30"></button></td>
+          <td><button type="button" id="notif" onclick="return notif3()"><img src="mark.png" width="30" height="30"></button></td>
+          </tr>
+          </table>
        </div>
       </div>
       <p class="meta" id="js-meta"></p>
