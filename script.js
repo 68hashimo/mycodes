@@ -204,6 +204,7 @@ const Peer = window.Peer;
         remoteVideo.srcObject = null;
         remoteVideo.remove();
       });
+      location.href="top.html"
     });
 
     sendTrigger.addEventListener('click', onClickSend);
