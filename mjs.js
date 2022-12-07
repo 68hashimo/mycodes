@@ -44,7 +44,8 @@ function userm(){
     return text2;
 }
 
-//recieve
+//receive
+/*
 window.onload = function(){
     var data = location.href.split("=")[1];
     var text = data.split("&")[0];
@@ -55,7 +56,7 @@ window.onload = function(){
     var text1=data1.split("=")[1];
     document.getElementById("js-room-id").value=text1;
 }
-
+*/
 
 //get cookie test
 function Cookies()
