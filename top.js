@@ -1,3 +1,7 @@
+//
+
+
+//テキストエリアの文字列を次のページに渡す＞今は使っていない
 function vroll(){
     let ckv="";
     let ftr=document.getElementsByName('rl');
@@ -20,11 +24,4 @@ function joined(){
     var id1 = roomid();
     location.href = "index.html?rl="+encodeURIComponent(text)+"&rid="+encodeURIComponent(id1);
 }
-
-
-
-function ten(){
-  const tend=document.getElementById("rid").value;
-  var s=document.getElementById("tn");
-  s.innerHTML=tend;
-}
+//ここまで
