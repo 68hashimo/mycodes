@@ -1,5 +1,5 @@
 const Peer = window.Peer;
-flg=true;
+flg=false;
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
@@ -147,11 +147,13 @@ flg=true;
     if (!peer.open) {
       return;
     }
+    
     //ここif_12/14
     if(flg){
       return;
     }
-    flg=false;
+    flg=true;
+    
     const room = peer.joinRoom("roomId", {
       //roomId.valueが元値
       mode: getRoomModeByHash(),
@@ -217,7 +219,7 @@ flg=true;
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
       //ここif_12/14
-      if(localText==""){
+      if(localText.value==""){
         alert("No input");
         return;
       }
