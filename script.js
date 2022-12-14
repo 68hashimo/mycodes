@@ -147,7 +147,11 @@ flg=true;
     if (!peer.open) {
       return;
     }
-
+    //ここif_12/14
+    if(flg){
+      return;
+    }
+    flg=false;
     const room = peer.joinRoom("roomId", {
       //roomId.valueが元値
       mode: getRoomModeByHash(),
@@ -212,6 +216,11 @@ flg=true;
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
+      //ここif_12/14
+      if(localText==""){
+        alert("No input");
+        return;
+      }
       room.send(localText.value);
 
       messages.textContent += `${"2"}: ${cut(localText.value)}\n`;
