@@ -17,7 +17,7 @@ flg=true;
     UA: ${navigator.userAgent}
     SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
   `.trim();
-
+  
   const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
 
   roomMode.textContent = getRoomModeByHash();
@@ -175,7 +175,7 @@ flg=true;
     });
 
     room.on('data', ({ data, src }) => {
-      // Show a message sent to the room and who sent
+      // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       messages.textContent += `${"1"}: ${cut(data)}\n`;
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
@@ -211,7 +211,7 @@ flg=true;
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
     function onClickSend() {
-      // Send message to all of the peers in the room via websocket
+      // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
       room.send(localText.value);
 
       messages.textContent += `${"2"}: ${cut(localText.value)}\n`;
