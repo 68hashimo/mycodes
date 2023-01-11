@@ -176,8 +176,9 @@ flg=false;
       newVideo.setAttribute('data-peer-id', stream.peerId);
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
-      var user = userm();
-      if (user != 'customer'){notify();}
+      //var user = userm();
+      notify();
+      //if (user != 'customer'){notify();}
     });
 
     room.on('data', ({ data, src }) => {

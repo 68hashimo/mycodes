@@ -36,7 +36,7 @@ function notify(){
       }  
     });
 }
-
+//userm使っていない
 function userm(){
     var data2=location.href.split("=")[1];
     var text2=data2.split("&")[0];
