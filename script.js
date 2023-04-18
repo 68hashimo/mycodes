@@ -232,6 +232,11 @@ flg=false;
       target.scrollTo(0,target.scrollHeight);
     }
     //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、通知が発生するようにする。
+    function notifytrigger(tex){
+      room.send(tex);
+      var  testmes = tex
+      console.log(testmes);
+    }
   });
 
   peer.on('error', console.error);
