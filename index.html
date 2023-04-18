@@ -38,6 +38,7 @@
           <pre class="messages" id="js-messages"></pre>
           <input type="text" id="js-local-text">
           <button id="js-send-trigger">送る</button>
+          <button id="event">event</button>
         </div>
 
         <div>
@@ -76,10 +77,10 @@
                   if(e.results[0].isFinal){
                       var autotext =  e.results[0][0].transcript
                       console.log(e);
-                      console.log(autotext);
+                      //console.log(autotext);
                       content.innerHTML += '<div>'+ autotext +'</div>';
                       speechm(autotext);
-                      notifytrigger(autotext);
+                      sendauto(autotext);
                     }
               }
               

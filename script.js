@@ -1,5 +1,6 @@
 const Peer = window.Peer;
 flg=false;
+at=false;
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
@@ -184,6 +185,7 @@ flg=false;
     room.on('data', ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       messages.textContent += `${"1"}: ${cut(data)}\n`;
+      console.log(data);
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     });
@@ -216,6 +218,8 @@ flg=false;
 
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
+    const ev=document.getElementById("event");
+    ev.addEventListener("click",notifytg(sendauto("hello")));
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
@@ -225,17 +229,16 @@ flg=false;
         return;
       }
       room.send(localText.value);
-
       messages.textContent += `${"2"}: ${cut(localText.value)}\n`;
       localText.value = '';
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     }
-    //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、通知が発生するようにする。
-    function notifytrigger(tex){
-      room.send(tex);
-      var  testmes = tex
-      console.log(testmes);
+    function notifytg(ttxt){
+      room.send(ttxt);
+      room.on('data', ({ data, src }) => {
+        console.log(data);
+      });
     }
   });
 
