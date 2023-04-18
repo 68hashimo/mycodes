@@ -231,6 +231,7 @@ flg=false;
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     }
+    //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、通知が発生するようにする。
   });
 
   peer.on('error', console.error);
