@@ -234,6 +234,7 @@ at=false;
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     }
+    
     function notifytg(ttxt){
       room.send(ttxt);
       room.on('data', ({ data, src }) => {
