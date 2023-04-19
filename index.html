@@ -62,7 +62,7 @@
           
               const btn = document.getElementById('btn');
               const content = document.getElementById('content');
-          
+              attxt="";
               btn.addEventListener('click' , function() {
               // 音声認識をスタート
               console.log("start");
@@ -77,10 +77,10 @@
                   if(e.results[0].isFinal){
                       var autotext =  e.results[0][0].transcript
                       console.log(e);
-                      //console.log(autotext);
+                      attxt=autotext;
                       content.innerHTML += '<div>'+ autotext +'</div>';
                       speechm(autotext);
-                      sendauto(autotext);
+                      sendauto(attxt);
                     }
               }
               

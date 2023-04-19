@@ -36,9 +36,3 @@ function speechm(te){
 }
 
     //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、通知が発生するようにする。
-function sendauto(tx){
-    console.log(tx);
-    const ev=document.getElementById("event");
-    ev.click();
-    return tx;
-}

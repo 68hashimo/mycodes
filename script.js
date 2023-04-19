@@ -13,6 +13,7 @@ at=false;
   const messages = document.getElementById('js-messages');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
+  const ev = document.getElementById('event');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -218,8 +219,7 @@ at=false;
 
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
-    const ev=document.getElementById("event");
-    ev.addEventListener("click",notifytg(sendauto("hello")));
+    ev.onclick=notifytg;
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
@@ -235,11 +235,14 @@ at=false;
       target.scrollTo(0,target.scrollHeight);
     }
     
-    function notifytg(ttxt){
-      room.send(ttxt);
-      room.on('data', ({ data, src }) => {
-        console.log(data);
-      });
+    function notifytg(){
+      var stxt="hellp"
+      //room.send(stxt);
+      /*room.on('data', ({stxt,attxt}) => {
+        console.log(attxt);
+        console.log(stxt)
+      });*/
+      console.log(stxt)
     }
   });
 
