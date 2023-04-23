@@ -236,9 +236,10 @@ at=false;
 
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
+    /*
     ev.addEventListener('click',sendtx);
-    ev.onclick=console.log("print")
-
+    ev.onclick=console.log("print");
+    */
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
