@@ -203,6 +203,17 @@ at=false;
       messages.textContent += `=== ${"2"}退出しました ===\n`;
       messages.textContent = null;
     });
+    //04/24
+    dataConnection.on("data",()=>{
+      const data ={
+        name:"文字起こし",
+        msg:"hoge"//autotxtsend()
+      };
+      dataConnection.send(data);
+    })
+    dataConnection.on("data",({name,msg})=>{
+      console.log(`${name}: ${msg}`);
+    })
 
     // for closing myself
     room.once('close', () => {
@@ -219,7 +230,9 @@ at=false;
 
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
-    ev.onclick=notifytg;
+    ev.addEventListener('click',sendtx);
+    ev.onclick=console.log("print")
+
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
@@ -234,15 +247,9 @@ at=false;
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     }
-    
-    function notifytg(){
-      var stxt="hellp"
-      //room.send(stxt);
-      /*room.on('data', ({stxt,attxt}) => {
-        console.log(attxt);
-        console.log(stxt)
-      });*/
-      console.log(stxt)
+
+    function sendtx(){
+      room.send(autotxtsend());
     }
   });
 

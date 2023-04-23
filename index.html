@@ -76,11 +76,14 @@
                   speech.stop();
                   if(e.results[0].isFinal){
                       var autotext =  e.results[0][0].transcript
+                      var expire = new Date();
+                      expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
                       console.log(e);
                       attxt=autotext;
                       content.innerHTML += '<div>'+ autotext +'</div>';
                       speechm(autotext);
-                      sendauto(attxt);
+                      document.cookie = "autotxt="+autotext+'; expires=' + expire.toUTCString();
+                      autotxtsend();
                     }
               }
               
@@ -123,9 +126,9 @@
     <script src="//cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script>
     <script src="../_shared/key.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
-    <script src="./script.js"></script>
     <script src="./mjs.js"></script>
     <script src="./mojiokoshi.js"></script>
+    <script src="./script.js"></script>
     <script src="notification.js"></script>
   </body>
 </html>

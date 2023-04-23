@@ -100,9 +100,11 @@ function GetCookies()
     var r = document.cookie.split(';'); 
     r.forEach(function(value) { 
     //cookie名と値に分ける
-        var content = value.split('=');    
+        var content = value.split('=');
+        if(content[0]!="autotxt"){
+            list.push( content[1] );
+        }
         //console.log( content[1] );
-        list.push( content[1] );
     })
     //console.log(list);
     return list;
