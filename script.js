@@ -142,6 +142,11 @@ at=false;
     debug: 3,
   }));
 
+  const nw_data={
+    name:"moji",
+    msg:"hello"
+  };
+
   // Register join handler
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
@@ -204,6 +209,7 @@ at=false;
       messages.textContent = null;
     });
     //04/24
+    /*
     dataConnection.on("data",()=>{
       const data ={
         name:"文字起こし",
@@ -214,7 +220,7 @@ at=false;
     dataConnection.on("data",({name,msg})=>{
       console.log(`${name}: ${msg}`);
     })
-
+    */
     // for closing myself
     room.once('close', () => {
       sendTrigger.removeEventListener('click', onClickSend);
