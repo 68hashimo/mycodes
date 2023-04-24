@@ -35,7 +35,7 @@ at=false;
     })
     .catch(console.error);
 
-  
+  /*
     async function min() {
       // 表示用のCanvas
       const canvas = document.getElementById("canvas");
@@ -95,7 +95,7 @@ at=false;
     }
 
   min();
-
+  */
 
 
   //カメラのoff機能
