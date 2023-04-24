@@ -147,6 +147,9 @@ at=false;
     msg:"hello"
   };
 
+  const dataConnection = new peer.connect("peerID");
+
+
   // Register join handler
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
@@ -210,6 +213,8 @@ at=false;
     });
     //04/24
     /*
+    --dataConnectionをインスタンス化する--
+    */
     dataConnection.on("data",()=>{
       const data ={
         name:"文字起こし",
@@ -220,7 +225,7 @@ at=false;
     dataConnection.on("data",({name,msg})=>{
       console.log(`${name}: ${msg}`);
     })
-    */
+    /**/
     // for closing myself
     room.once('close', () => {
       sendTrigger.removeEventListener('click', onClickSend);
