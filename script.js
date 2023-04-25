@@ -14,6 +14,7 @@ at=false;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
   const evc = document.getElementById('event');
+  const atxt = document.getElementById('atxt');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -191,6 +192,7 @@ at=false;
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       if(typeof(data)=="object"){
         console.log(data.msg);
+        atxt.innerHTML += '<div>'+ String(data.msg) +'</div>';
         speechm(String(data.msg));
         return
       }
