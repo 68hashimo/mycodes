@@ -1,3 +1,7 @@
+const ev = document.getElementById('ev');
+ev.addEventListener('click',ev_click);
+const bt_click = document.getElementById('event');
+
 function GCookies()
 {
     //console.log("gcookie");
@@ -66,13 +70,12 @@ function speechm(te){
     //content.innerHTML += ls;
 }
 
-function autotxtsend(){
-    var txlist=autotxtcookie();
-    console.log(txlist);
+function ev_click(){
+    console.log("play_ev_click");
+    bt_click.click();
 }
 /* 
-const ev = document.getElementById('event');
-ev.onclick=console.log("ok!");
+
 ev.onclick=autotxtsend;
 */
 //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、

@@ -12,6 +12,7 @@
       <a href="get_cok.html">語句を登録</a>
       <button id="t_cok" onclick="Cookies()">登録されている語句を表示</button>
       <button id="event">event</button>
+      <button id="ev">event_test</button>
       <div id = t_cok>
 
       </div>
@@ -82,6 +83,7 @@
                       content.innerHTML += '<div>'+ autotext +'</div>';
                       speechm(autotext);
                       document.cookie = "autotxt="+autotext+'; expires=' + expire.toUTCString();
+                      ev_click();
                     }
               }
               

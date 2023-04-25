@@ -257,7 +257,6 @@ at=false;
     function clg(){
       var automsg=autotxtcookie();
       var autotxt = {pn:"mojiokoshi",msg:automsg};
-      autotxtsend();
       room.send(autotxt)
     }
 
