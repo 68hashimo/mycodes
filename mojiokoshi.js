@@ -37,7 +37,7 @@ function autotxtcookie(){
             k++;
         }
         atx=list_data[k];
-        console.log(k);
+        //console.log(k);
         return atx;
 }
 
@@ -69,12 +69,11 @@ function speechm(te){
 function autotxtsend(){
     var txlist=autotxtcookie();
     console.log(txlist);
-    return 
 }
- 
+/* 
 const ev = document.getElementById('event');
 ev.onclick=console.log("ok!");
 ev.onclick=autotxtsend;
-
+*/
 //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、
 //通知が発生するようにする。

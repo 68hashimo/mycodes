@@ -13,7 +13,7 @@ at=false;
   const messages = document.getElementById('js-messages');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
-  const ev = document.getElementById('event');
+  const evc = document.getElementById('event');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -21,6 +21,7 @@ at=false;
   `.trim();
   
   const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
+  var expire = new Date();
 
   roomMode.textContent = getRoomModeByHash();
   window.addEventListener(
@@ -142,14 +143,6 @@ at=false;
     debug: 3,
   }));
 
-  const nw_data={
-    name:"moji",
-    msg:"hello"
-  };
-
-  const dataConnection = new peer.connect("peerID");
-
-
   // Register join handler
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
@@ -164,6 +157,8 @@ at=false;
     }
     flg=true;
     
+    var check_type=Object.prototype.toString;
+
     const room = peer.joinRoom("roomId", {
       //roomId.valueが元値
       mode: getRoomModeByHash(),
@@ -175,6 +170,7 @@ at=false;
     });
     room.on('peerJoin', peerId => {
       messages.textContent += `=== test ===\n`;
+      console.log("ピアIDは:"+peerId);
     });
 
     // Render remote stream for new peer join in the room
@@ -193,7 +189,12 @@ at=false;
 
     room.on('data', ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
-      messages.textContent += `${"1"}: ${cut(data)}\n`;
+      if(typeof(data)=="object"){
+        console.log(data.msg);
+        speechm(String(data.msg));
+        return
+      }
+      messages.textContent += `${"あいて"}: ${cut(data)}\n`;
       console.log(data);
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
@@ -211,21 +212,6 @@ at=false;
       messages.textContent += `=== ${"2"}退出しました ===\n`;
       messages.textContent = null;
     });
-    //04/24
-    /*
-    --dataConnectionをインスタンス化する--
-    */
-    dataConnection.on("data",()=>{
-      const data ={
-        name:"文字起こし",
-        msg:"hoge"//autotxtsend()
-      };
-      dataConnection.send(data);
-    })
-    dataConnection.on("data",({name,msg})=>{
-      console.log(`${name}: ${msg}`);
-    })
-    /**/
     // for closing myself
     room.once('close', () => {
       sendTrigger.removeEventListener('click', onClickSend);
@@ -239,12 +225,20 @@ at=false;
       location.href="top.html"
     });
 
+    //04/24
+    //--dataConnectionをインスタンス化する--
+    /*
+    const conn = peer.connect(peerId);
+    conn.on("data",(data)=>{
+        console.log(data);
+    });
+    conn.send(nw_data);
+    */
+
+    evc.addEventListener('click',clg);
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
-    /*
-    ev.addEventListener('click',sendtx);
-    ev.onclick=console.log("print");
-    */
+
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
@@ -254,16 +248,19 @@ at=false;
         return;
       }
       room.send(localText.value);
-      messages.textContent += `${"2"}: ${cut(localText.value)}\n`;
+      messages.textContent += `${"あなた"}: ${cut(localText.value)}\n`;
       localText.value = '';
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     }
 
-    function sendtx(){
-      room.send(autotxtsend());
+    function clg(){
+      var automsg=autotxtcookie();
+      var autotxt = {pn:"mojiokoshi",msg:automsg};
+      autotxtsend();
+      room.send(autotxt)
     }
-  });
 
+  });
   peer.on('error', console.error);
 })();

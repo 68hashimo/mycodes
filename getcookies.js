@@ -72,7 +72,7 @@ function sendcookies(){
     }
     txt_id.value = '';
     load();
-    console.log("txt_reset")
+    //console.log("txt_reset")
 }
 
 //重複判定

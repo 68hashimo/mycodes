@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>test</title>
+    <title>videochat</title>
     <link rel="stylesheet" href="pr1.css">
   </head>
   <body>
@@ -11,6 +11,7 @@
       <a href="top.html">top</a><br>
       <a href="get_cok.html">語句を登録</a>
       <button id="t_cok" onclick="Cookies()">登録されている語句を表示</button>
+      <button id="event">event</button>
       <div id = t_cok>
 
       </div>
@@ -38,7 +39,6 @@
           <pre class="messages" id="js-messages"></pre>
           <input type="text" id="js-local-text">
           <button id="js-send-trigger">送る</button>
-          <button id="event">event</button>
         </div>
 
         <div>
@@ -79,11 +79,9 @@
                       var expire = new Date();
                       expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
                       console.log(e);
-                      attxt=autotext;
                       content.innerHTML += '<div>'+ autotext +'</div>';
                       speechm(autotext);
                       document.cookie = "autotxt="+autotext+'; expires=' + expire.toUTCString();
-                      autotxtsend();
                     }
               }
               
