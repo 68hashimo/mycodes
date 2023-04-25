@@ -227,8 +227,7 @@ at=false;
       location.href="top.html"
     });
 
-    //04/24
-    //--dataConnectionをインスタンス化する--
+    //--dataConnection-
     /*
     const conn = peer.connect(peerId);
     conn.on("data",(data)=>{
