@@ -79,4 +79,4 @@ function ev_click(){
 ev.onclick=autotxtsend;
 */
 //room.send()で受け渡し可能かと思われる。文字起こしのtextが確定したタイミングで他のピアに対してtextを受け渡し判定し、
-//通知が発生するようにする。
+//通知が発生するようにする。komento
