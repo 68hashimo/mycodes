@@ -1,6 +1,5 @@
-const ev = document.getElementById('ev');
-ev.addEventListener('click',ev_click);
 const bt_click = document.getElementById('event');
+//bt_click.style.visibility="hidden"
 
 function GCookies()
 {
