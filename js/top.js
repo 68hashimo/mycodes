@@ -17,7 +17,7 @@ function vroll(){
 function rname(){
   var rid=document.getElementById("rname").value;
   if(rid.length==0){
-    return ture
+    return true
   }
   return rid
 }
