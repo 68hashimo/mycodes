@@ -170,7 +170,7 @@ at=false;
       messages.textContent += '=== 参加しました ===\n';
     });
     room.on('peerJoin', peerId => {
-      messages.textContent += `=== test ===\n`;
+      messages.textContent += `=== 参加しました! ===\n`;
       console.log("ピアIDは:"+peerId);
     });
 
