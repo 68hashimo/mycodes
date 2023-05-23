@@ -25,62 +25,7 @@ function sendcookies(){
             document.cookie ='name'+cok_num+'='+val+'; expires=' + expire.toUTCString();
             cok_num+=1;
         }
-    })/*
-    if(document.cookie==""){
-        if(txt_sp.length>1 && dist(lst,txt_sp,flg) && txt_er(txt,txt_sp)){
-            var i = 0;
-            for(var n=lst_len;n<(lst_len+txt_sp.length);n++){
-                document.cookie ='name'+n+'='+txt_sp[i]+'; expires=' + expire.toUTCString();
-                i++;
-            }
-        }
-        else if(txt_sp.length==1 && dist(lst,txt_sp,flg) && txt_er(txt,txt_sp)){
-            if(document.cookie==""){
-                document.cookie ='name0='+txt+'; expires=' + expire.toUTCString(); 
-            }
-            else if(lst_len==1){
-                document.cookie ='name1='+txt+'; expires=' + expire.toUTCString(); 
-            }
-            else{
-            document.cookie ='name'+(lst_len+1)+'='+txt+'; expires=' + expire.toUTCString();    
-            }
-        }
-        else{
-            console.log("no value or Duplicate");
-            //document.cookie = 'data=123; max-age=10';
-            //return;
-        }
-
-    }
-    else{
-        if(txt_sp.length>1 && dist(lst,txt_sp,flg) && txt_er(txt,txt_sp)){
-            var i = 0;
-            var l = spl()+1;
-            for(var f=lst_len;f<(lst_len+txt_sp.length);f++){
-                document.cookie ='name'+l+'='+txt_sp[i]+'; expires=' + expire.toUTCString();
-                i++;
-                l++;
-            }
-        }
-        else if(txt_sp.length==1 && dist(lst,txt_sp,flg) && txt_er(txt,txt_sp)){
-            if(document.cookie==""){
-                document.cookie ='name0='+txt+'; expires=' + expire.toUTCString(); 
-            }
-            else if(lst_len==1 && spl()!=1){
-                document.cookie ='name1='+txt+'; expires=' + expire.toUTCString(); 
-            }
-            else{
-            document.cookie ='name'+(spl()+1)+'='+txt+'; expires=' + expire.toUTCString();    
-            }
-            console.log("length=1")
-        }
-        else{
-            console.log("no value or Duplicate");
-            //document.cookie = 'data=123; max-age=10';
-            //return;
-        }
-
-    }*/
+    })
     txt_id.value = '';
     load();
     //console.log("txt_reset")
