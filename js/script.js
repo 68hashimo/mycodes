@@ -196,7 +196,8 @@ at=false;
         speechm(String(data.msg));
         return
       }
-      messages.textContent += `${"あいて"}: ${cut(data)}\n`;
+      var user = data.split(":");
+      messages.textContent += `${user[0]}: ${cut(data[1])}\n`;
       console.log(data);
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
@@ -248,8 +249,9 @@ at=false;
         alert("No input");
         return;
       }
-      room.send(localText.value);
-      messages.textContent += `${"あなた"}: ${cut(localText.value)}\n`;
+      var s_msg=userm()+":"+localText.value;/*`${userm()}:${localText.value}`;*/
+      room.send(s_msg);
+      messages.textContent += `${userm()}: ${cut(localText.value)}\n`;
       localText.value = '';
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);

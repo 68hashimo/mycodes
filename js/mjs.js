@@ -44,25 +44,31 @@ function notify(){
 }
 //userm使っていない
 function userm(){
-    var data2=location.href.split("=")[1];
-    var text2=data2.split("&")[0];
+    try{
+        var data2=location.href.split("=")[1];
+        var text2=data2.split("&")[0];
+        return text2;
+    }catch(e){
+        var u_name="no name";
+        return u_name; 
+    }
     //document.getElementById("msg").innerHTML=text2;
-    return text2;
 }
 
 //receive
-/*
+
 window.onload = function(){
     var data = location.href.split("=")[1];
     var text = data.split("&")[0];
     document.getElementById("msg").innerHTML = text;
     
-    //decodeURIComponent(text);
+    /*decodeURIComponent(text);
     var data1 = location.href.split("&")[1];
     var text1=data1.split("=")[1];
     document.getElementById("js-room-id").value=text1;
+    */
 }
-*/
+//*/
 
 //get cookie test
 function Cookies()

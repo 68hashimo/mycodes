@@ -14,14 +14,20 @@ function vroll(){
     return ckv
 }
 
-function roomid(){
-  let rid=document.getElementById("rid").value;
+function rname(){
+  var rid=document.getElementById("rname").value;
+  if(length(rid)==0){
+    return ture
+  }
   return rid
 }
 
 function joined(){
-    var text = vroll();
-    var id1 = roomid();
-    location.href = "index.html?rl="+encodeURIComponent(text)+"&rid="+encodeURIComponent(id1);
+    //var text = vroll();
+    var id1 = rname();
+    if(typeof(id1)=="boolean"){
+      return alert("no input");
+    }
+    location.href = "index.html?rl="+"rid="+encodeURIComponent(id1);
 }
 //ここまで

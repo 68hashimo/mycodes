@@ -203,8 +203,12 @@ function spl(){
     for(var sp_cok of spl_sp){
         var sp_name =sp_cok.split("=");
         var sp_num = sp_name[0].replace("name","");
-        sp_num=Number(sp_num);
-        ls_num.push(sp_num);
+        try{
+            sp_num=Number(sp_num);
+            ls_num.push(sp_num);
+        }catch(e){
+            console.log("name isnot number");
+        }        
     }
     var vlmax = Math.max(...ls_num);
     console.log(vlmax);

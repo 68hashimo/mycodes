@@ -8,9 +8,7 @@ function GCookies()
     var r = document.cookie.split(';'); 
     r.forEach(function(value) { 
         var content = value.split('=');
-        if(content[0]!="autotxt"){
-            list.push( content[1] );
-        }  
+        list.push( content[1] );
     })
     return list;
 }
