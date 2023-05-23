@@ -11,10 +11,21 @@ function sendcookies(){
     const txt_id=document.getElementById("txt");
     const txt=document.getElementById("txt").value;
     console.log(txt);
+    if(txt==""){
+        alert("not input");
+        return
+    }
     var lst=GetCookies();
     var lst_len=lst.length;
     var txt_sp=txt.split(',');
     console.log(txt_sp);
+    var cok_num=spl()+1;
+    txt_sp.forEach(function(val){
+        if(val != "" && dist_s(lst,val)){
+            document.cookie ='name'+cok_num+'='+val+'; expires=' + expire.toUTCString();
+            cok_num+=1;
+        }
+    })/*
     if(document.cookie==""){
         if(txt_sp.length>1 && dist(lst,txt_sp,flg) && txt_er(txt,txt_sp)){
             var i = 0;
@@ -69,10 +80,25 @@ function sendcookies(){
             //return;
         }
 
-    }
+    }*/
     txt_id.value = '';
     load();
     //console.log("txt_reset")
+}
+
+//エラーワード
+function txt_er(txt_e,txt_esp){
+    if(txt_e==''){
+        alert("no value");
+        return false;
+    }
+    for(var er of txt_esp){
+        if(er==''){
+            alert('input error');
+            return false;
+        }
+    }
+    return true;
 }
 
 //重複判定
@@ -92,6 +118,18 @@ function dist(lst_d,txt_d,flg){
     }
     return flg;
 }
+//重複処理ver2
+function dist_s(lst,val){
+    for(var s=0;s<lst.length;s++){
+        if(lst[s]==val){
+            console.log("value exist");
+            alert("Duplicate");
+            return false;
+        }
+    }
+    return true;
+}
+
 
 //cookie取得
 function GetCookies()
@@ -157,7 +195,7 @@ function del_c(check_ed){
     for(var u =0;u<lst_del.length;u++){
         if(lst_del[u]==del){
             var c_key = del_sp[u].split("=");
-            document.cookie = c_key[0]+'='+del+'; max-age=1;'
+            document.cookie = c_key[0]+'='+del+'; max-age=0;'
             var del_keynum = c_key[0].replace("name","");
             var del_keynum=Number(del_keynum);
             var index = ls_num.indexOf(del_keynum);
@@ -180,20 +218,6 @@ function notif(){
     });
 }
 
-//エラーワード
-function txt_er(txt_e,txt_esp){
-    if(txt_e==''){
-        alert("no value");
-        return false;
-    }
-    for(var er of txt_esp){
-        if(er==''){
-            alert('input error');
-            return false;
-        }
-    }
-    return true;
-}
 
 //名前の後についている数値の最大値を返します。
 function spl(){
@@ -211,7 +235,7 @@ function spl(){
         }        
     }
     var vlmax = Math.max(...ls_num);
-    console.log(vlmax);
+    console.log(vlmax,ls_num);
     //div.innerHTML=ls_num;
     ls_num=[];
     return vlmax;
