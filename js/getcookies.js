@@ -16,7 +16,7 @@ function sendcookies(){
         return
     }
     var lst=GetCookies();
-    //svar lst_len=lst.length;
+    //var lst_len=lst.length;
     var txt_sp=txt.split(',');
     console.log(txt_sp);
     var cok_num=spl()+1;
