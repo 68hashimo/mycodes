@@ -47,7 +47,7 @@ function userm(){
     try{
         var data2=location.href.split("=")[1];
         var text2=data2.split("&")[0];
-        return text2;
+        return decodeURI(data2);
     }catch(e){
         var u_name="no name";
         return u_name; 
