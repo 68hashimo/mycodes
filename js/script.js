@@ -197,7 +197,7 @@ at=false;
         return
       }
       var user = data.split(":");
-      messages.textContent += `${user[0]}: ${cut(data[1])}\n`;
+      messages.textContent += `${user[0]}: ${cut(user[1])}\n`;
       console.log(data);
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
