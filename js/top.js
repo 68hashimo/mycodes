@@ -30,4 +30,4 @@ function joined(){
     }
     location.href = "index.html?"+"rid="+encodeURIComponent(id1);
 }
-//ここまで
+//ここまで変更
