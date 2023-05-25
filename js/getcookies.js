@@ -46,23 +46,6 @@ function txt_er(txt_e,txt_esp){
     return true;
 }
 
-//重複判定
-function dist(lst_d,txt_d,flg){
-    for(var s=0;s<txt_d.length;s++){
-        for(var t =0;t<lst_d.length;t++){
-            if(txt_d[s]==lst_d[t]){
-                console.log("value exist");
-                alert("Duplicate")
-                flg=false;
-                break;
-            }
-        }
-        if(! flg){
-            break;
-        }
-    }
-    return flg;
-}
 //重複処理ver2
 function dist_s(lst,val){
     for(var s=0;s<lst.length;s++){
