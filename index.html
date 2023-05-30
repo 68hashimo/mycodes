@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>videochat</title>
     <link rel="stylesheet" href="css/pr1.css">
+    <link rel="stylesheet" href="two.css">
   </head>
   <body>
     <div class="container">
@@ -26,28 +27,33 @@
       </p>
       <div class="room">
         <div class="remote-streams" id="js-remote-streams"></div>
-        <div>
-          <video id="js-local-stream"></video>
-          <span id="js-room-mode"></span>
-          <!--<input type="text" placeholder="Room Name" id="js-room-id">-->
-          <button id="js-join-trigger">参加</button>
-          <button id="js-leave-trigger">退出</button>
-       </div>
+        <div class="box content">
+          <div>
+            <video id="js-local-stream"></video>
+            <span id="js-room-mode"></span>
+            <!--<input type="text" placeholder="Room Name" id="js-room-id">-->
+            <button id="js-join-trigger">参加</button>
+            <button id="js-leave-trigger">退出</button>
+        </div>
+      </div>
 
     
         <div><!---チャット-->
-          
-          <pre class="messages" id="js-messages"></pre>
-          <input type="text" id="js-local-text">
-          <button id="js-send-trigger">送る</button>
+          <div class="box send"> 送信など
+
+            <pre class="messages" id="js-messages"></pre>
+            <input type="text" id="js-local-text">
+            <button id="js-send-trigger">送る</button>
+          </div>
+
         </div>
 
         <div>
             <!----ここからミュート機能-->
-          <button type="button" name="camera" id="camera-button" >カメラoff</button>
-          <button type="button" name="cameraon"id="camera-on">カメラon</button>
-          <button type="button" name="micmute" id="mic-mute">マイクミュート</button>
-          <button type="button" name="micon" id="mic-on">マイクミュート解除</button>
+            <div class="box botom">
+              <button type="button" name="camera" id="camera-button" ><img src="img/camera.png"></button>
+              <button type="button" name="micmute" id="mic-button"><img src="img/mic.png"></button>
+            </div>
 
         </div>
 
