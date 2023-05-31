@@ -1,5 +1,5 @@
 const t_cok=document.getElementById("t_cok");
-const ev = document.getElementById('ev');
+const ev = document.getElementById('ev_t');
 
 function cut(tx){
     let i =1;
@@ -49,7 +49,7 @@ function userm(){
         var u_name="no name";
         return u_name; 
     }
-    //document.getElementById("msg").innerHTML=text2;
+    //document.getElementById("txt_cok").innerHTML=text2;
 }
 
 //receive
@@ -57,7 +57,7 @@ function userm(){
 window.onload = function(){
     var data = location.href.split("=")[1];
     var text = data.split("&")[0];
-    document.getElementById("msg").innerHTML = text;
+    document.getElementById("txt_cok").innerHTML = text;
     
     /*decodeURIComponent(text);
     var data1 = location.href.split("&")[1];
@@ -74,5 +74,5 @@ function Cookies()
     console.log(GCookies());
 } 
 
-ev.style.visibility="hidden"
-ev.addEventListener('click',ev_click);
+// ev.style.visibility="hidden"
+ev.addEventListener('click',Cookies);
