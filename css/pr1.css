@@ -15,7 +15,7 @@
     z-index: 99999999;
     position:relative;
     width:1080px;
-}*/
+}
 
 body{
     background-color: #e0ffff;
@@ -38,7 +38,7 @@ body{
 }
 /*#js-messages{
     overflow-x:hidden;
-}:*/
+}:
 #js-local-text{
     position:absolute;
     top: 35px;
@@ -78,3 +78,4 @@ body{
     position:absolute;
     font-size:0px;
 }
+*/

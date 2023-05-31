@@ -1,0 +1,92 @@
+/* チャット */
+.chat {
+    position: absolute;
+    width: 25%;
+    height: 75%;
+    left: 25%;
+    top: 0;
+    background: #000000;
+    border: 1px solid #000000;
+  }
+  
+  .content {
+    /* コンテンツ領域 */
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+  }
+
+  .content video {
+    width: calc(33% - 10px); /* 画面の横幅を3分割し、間隔を考慮して幅を設定 */
+    height: 220px;
+    margin-bottom: 10px;
+  }
+
+  .botom {
+    /* ボタン領域 */
+    position: absolute;
+    width: 75%;
+    height: 25%;
+    left: 0;
+    bottom: 0;
+    background: #D9D9D9;
+    border: 1px solid #000000;
+  }
+  
+  .send {
+    /* 送信など */
+    position: absolute;
+    width: 25%;
+    height: 10%;
+    right: 0;
+    bottom: 0;
+    background: #52C9EE;
+    border: 1px solid #000000;
+  }
+  
+  .close {
+    /* 戻る */
+    position: absolute;
+    width: 158px;
+    height: 41px;
+    left: calc(100% - 158px); /*1765;*/
+    top: 0px;
+    background: #D9D9D9;
+  }
+  
+  /* ストラクチャー */
+  .btn {
+    display: inline-block;
+    width: 80px;
+    max-width: 100%;
+    padding: 20px 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16);
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* クリックエフェクト */
+.starImage.clicked {
+  opacity: 0.7;
+}
+
+/* 通知メッセージ */
+.notification {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #52C9EE;
+  color: #ffffff;
+  font-size: 16px;
+  display: none;
+}
