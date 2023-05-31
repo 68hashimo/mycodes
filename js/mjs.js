@@ -1,8 +1,5 @@
 const t_cok=document.getElementById("t_cok");
 const ev = document.getElementById('ev');
-ev.style.visibility="hidden"
-ev.addEventListener('click',ev_click);
-
 
 function cut(tx){
     let i =1;
@@ -76,3 +73,6 @@ function Cookies()
     //ev.click();
     console.log(GCookies());
 } 
+
+ev.style.visibility="hidden"
+ev.addEventListener('click',ev_click);

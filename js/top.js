@@ -1,7 +1,3 @@
-//
-
-
-//テキストエリアの文字列を次のページに渡す＞今は使っていない
 function vroll(){
     let ckv="";
     let ftr=document.getElementsByName('rl');
