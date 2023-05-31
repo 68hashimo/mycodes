@@ -4,8 +4,7 @@
 }
 
 
-
-/*#js-local-stream{
+#js-local-stream{
     z-index: 999999;
     position:absolute;
     width:50%;
@@ -36,7 +35,7 @@ body{
     right:170px;
     z-index:-10;
 }
-/*#js-messages{
+#js-messages{
     overflow-x:hidden;
 }:
 #js-local-text{
@@ -73,9 +72,9 @@ body{
     font-size: 18px;
     right:22px;
 }
-
+*/
 #js-meta,.note,#js-room-mode{
     position:absolute;
     font-size:0px;
 }
-*/
+
