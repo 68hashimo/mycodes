@@ -57,7 +57,8 @@ function userm(){
 window.onload = function(){
     var data = location.href.split("=")[1];
     var text = data.split("&")[0];
-    document.getElementById("txt_cok").innerHTML = text;
+    
+    document.getElementById("txt_cok").innerHTML = `your name:${decodeURI(text)}`;
     
     /*decodeURIComponent(text);
     var data1 = location.href.split("&")[1];
