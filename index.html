@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>videochat</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css"> -->
     <link rel="stylesheet" href="css/pr1.css">
     <!-- <link rel="stylesheet" href="css/main.css"> -->
   </head>
   <body>
-    <div class="container">
+    <div class=""></div>
+    <div id="overlay" class="menu-event"></div>
+    <div id="menu-bar">
+      <a href="#" id="menu-button" class="menu-event">メニューを開く</a>
+    </div>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="#">メニュー01</a></li>
+        <li><p>めにめにゅーだyo</p></li>
+      </ul>
+    </nav>
+    <div id="contents">
+      <p class="main-contents"></p>
+    </div>
+    <div class="container" id="container_main">
       <a href="top.html">top</a><br>
       <a href="get_cok.html">語句を登録</a>
       <button id="t_cok" onclick="Cookies()">登録されている語句を表示</button>
@@ -32,11 +47,10 @@
             <!--<input type="text" placeholder="Room Name" id="js-room-id">-->
             <button id="js-join-trigger">参加</button>
             <button id="js-leave-trigger">退出</button>
-        </div>
+      </div>
 
       <div><!---チャット-->
-        <div class="box_send"> 送信など
-
+        <div class="box send">
           <pre class="messages" id="js-messages"></pre>
           <input type="text" id="js-local-text">
           <button id="js-send-trigger">送る</button>
@@ -45,7 +59,7 @@
 
       <div>
           <!----ここからミュート機能-->
-          <div class="box_botom">
+          <div class="box botom">
             <button type="button" name="camera" id="camera-button" ><img src="img/camera.png"></button>
             <button type="button" name="micmute" id="mic-button"><img src="img/mic.png"></button>
           </div>
