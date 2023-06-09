@@ -2,52 +2,126 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Sample</title>
   </head>
   <body>
-    <h2>☆addition</h2>
-    <button onclick="sendcookies();">Save Text</button>
+    <p class="is-size-3">通知する語句を登録</p>
     <!--
-    <button onclick="GetCookies();">Text</button>
-    <button onclick="wrt();">write Text</button>
-    <button onclick="notif();">notification</button>
-    -->
+    <h2 class=is-size-4>☆addition</h2>
+    <button class="button is-link is-outlined" onclick="sendcookies();">Save Text</button>
     <br />
     <textarea id="txt" cols="50" rows="5"></textarea>
+    <input class="input is-success" type="text" placeholder="Success input">
 
-    <!--
-    <div>
-      <br />
-      <p>delete</p>
-      <button onclick="getchecks();">delete_cookies</button>
-      <br />
-      <textarea id="del" cols="50" rows="5"></textarea>
-    </div>
-    <br>
-    -->
-    <h2>☆delete</h2>
-    <button onclick="getchecks();">delete_cookies</button>
+    <h2 class=is-size-4>☆delete</h2>
+    <button class="button is-link is-outlined" onclick="getchecks();">delete_cookies</button>
     <br>
     <div id="cok">
 
     </div>
     <br>
     <div id="c">
-      <h2>〇登録されているワード〇<br>↓ _______↓</h2>
+      <h2 class=is-size-4>〇登録されているワード〇<br>↓ _______↓</h2>
       <div id="cok1">
 
       </div>
     </div>
-    <!--
     <br>
-    <button onclick="spl();getchecks();">spl_cookies</button>
-    -->
-    <br>
-    <h3>テストページ↓</h3>
+    <h3 class=is-size-4>テストページ↓</h3>
     <a href = 'test_cok.html'>test page</a>
     <br>
-    <h3>ビデオチャット↓</h3>
+    <h3 class=is-size-4>ビデオチャット↓</h3>
     <a href = 'index.html'>video chat</a>
+     -->
+    <div class="column is-two-thirds">
+      <nav class="panel is-info">
+        <p class="panel-heading">
+          ☆addition
+        </p>
+        <div class="panel-block">
+          <input id="save_text" class="input is-success is-fullwidth" type="text" placeholder="input">
+        </div>
+        <div class="panel-block">
+          <input id="save_text2" class="input is-success is-fullwidth" type="text" placeholder="input">
+        </div>
+        <div class="panel-block">
+          <input id="save_text3" class="input is-success is-fullwidth" type="text" placeholder="input">
+        </div>
+        <div class="panel-block">
+          <input id="save_text4" class="input is-success is-fullwidth" type="text" placeholder="input">
+        </div>
+        <div id="save_text"class="panel-block">
+          <input id="save_text5" class="input is-success is-fullwidth" type="text" placeholder="input">
+        </div>
+        <div class="panel-block">
+          <p>・登録↓</p>
+        </div>
+        <div class="panel-block">
+          <button class="button is-link is-outlined is-fullwidth" onclick="sendcookies();">Save Text</button>
+        </div>
+      </nav>
+    </div>
+    <!-- <button class="button is-link is-outlined" onclick="test_elm();">test_elm</button> -->
+    <div class="column is-two-thirds">
+      <nav class="panel  is-info">
+        <p class="panel-heading">
+          ☆delete
+        </p>
+        <label class="panel-block">
+          <div id="cok">
+
+          </div>
+        </label>
+        <div class="panel-block">
+          <button class="button is-link is-outlined is-fullwidth" onclick="getchecks();">delete_cookies</button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="column is-two-thirds">
+      <nav class="panel  is-info">
+        <p class="panel-heading">
+          〇登録されているワード〇
+        </p>
+        <label class="panel-block">
+          <div id="cok1">
+
+          </div>
+        </label>
+        <div class="panel-block">
+          <!-- <button class="button is-link is-outlined is-fullwidth" onclick="getchecks();">delete_cookies</button> -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="column is-two-thirds">
+      <nav class="panel  is-info">
+        <p class="panel-heading">
+          ビデオチャット↓
+        </p>
+        <label class="panel-block">
+          <a class = "button  is-link is-outlined is-fullwidth" href = 'index.html'>video chat</a>
+        </label>
+        <div class="panel-block">
+        </div>
+      </nav>
+    </div>
+
+    <div class="column is-two-thirds">
+      <nav class="panel  is-info">
+        <p class="panel-heading">
+          〇テストページ↓
+        </p>
+        <label class="panel-block">
+          <a class = "button  is-link is-outlined is-fullwidth" href = 'test_cok.html'>test page</a>
+        </label>
+        <div class="panel-block">
+        </div>
+      </nav>
+    </div>
+
+
     <script src="js/getcookies.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
   </body>

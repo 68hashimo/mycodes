@@ -1,15 +1,37 @@
 //クッキーを連想配列として取得
 //クッキーの名前をキーとした連想配列で、すべてのクッキーを得られます。
 
+const el_inp=document.getElementById("save_text");
+const el_inp2=document.getElementById("save_text2");
+const el_inp3=document.getElementById("save_text3");
+const el_inp4=document.getElementById("save_text4");
+const el_inp5=document.getElementById("save_text5");
+const el_ls=[el_inp,el_inp2,el_inp3,el_inp4,el_inp5];
+function save_text(){
+    var moji_ls=[];
+    el_ls.forEach(e => {
+        //console.log(e.value);
+        if(e.value!=""){
+            moji_ls.push(e.value);
+        }
+    });
+    console.log(moji_ls);
+    return moji_ls;
+}
+function clear_inp(){
+    el_ls.forEach(e => {
+        e.value="";
+    });
+}
+
 var ls_num = []; 
 var div=document.getElementById("div");
 
 function sendcookies(){
     var expire = new Date();
-    var flg=true;
     expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
     const txt_id=document.getElementById("txt");
-    const txt=document.getElementById("txt").value;
+    var txt=document.getElementById("txt").value+"hoge";
     console.log(txt);
     if(txt==""){
         alert("not input");
@@ -19,6 +41,7 @@ function sendcookies(){
     //var lst_len=lst.length;
     var txt_sp=txt.split(',');
     console.log(txt_sp);
+    var txt_sp=save_text();
     var cok_num=spl()+1;
     txt_sp.forEach(function(val){
         if(val != "" && dist_s(lst,val)){
@@ -27,6 +50,8 @@ function sendcookies(){
         }
     })
     txt_id.value = '';
+    alert('complete');
+    clear_inp();
     load();
     //console.log("txt_reset")
 }

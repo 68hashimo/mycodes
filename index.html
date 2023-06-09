@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>videochat</title>
     <link rel="stylesheet" href="css/pr1.css">
+    <link rel="stylesheet" href="css/style_moji.css">
     <!-- <link rel="stylesheet" href="css/main.css"> -->
   </head>
   <body>
@@ -15,6 +16,7 @@
     </div>
     <nav id="nav-menu">
       <ul>
+        <li><a id='loc_top' href="top.html">top</a><br></li>
         <li><h3>文字起こし</h3></li>
         <li><p id="menu_mymoji">あなたの文字起こし</p></li>
         <li><p id="menu_roommoji">ルームの文字起こし</p></li>
@@ -24,8 +26,7 @@
       <p class="main-contents"></p>
     </div>
     <div class="container" id="container_main">
-      <a href="top.html">top</a><br>
-      <a href="get_cok.html">語句を登録</a>
+      <button onclick="location.href='get_cok.html'">語句を登録</button>
       <button id="t_cok" onclick="start_speech()">文字起こし</button>
       <button id="event">event</button>
       <button id="ev_t">event_test</button>
