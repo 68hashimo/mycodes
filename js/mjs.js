@@ -1,5 +1,7 @@
 const t_cok=document.getElementById("t_cok");
 const ev = document.getElementById('ev_t');
+const join_t=document.getElementById('js-join-trigger');
+const autotx_btn=document.getElementById('btn');
 
 function cut(tx){
     let i =1;
@@ -72,6 +74,15 @@ function Cookies()
     //ev.click();
     console.log(GCookies());
 }
+window.addEventListener('load', function(){
+    console.log("load：リソースファイルを全て読み込みました。");
+    setTimeout(function(){
+        join_t.click();
+        ev.click();
+        //autotx_btn.click();
+        console.log(join_t);
+    },2000);    
+});
 
 //jquery_menu
 document.addEventListener('DOMContentLoaded', function(){

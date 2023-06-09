@@ -64,6 +64,7 @@ body{
     top: 0px;
     right:82px;
     font-size: 18px;
+    visibility: hidden;
 }
 
 #js-leave-trigger{
@@ -77,6 +78,9 @@ body{
     position:absolute;
     right:-100%;
     font-size:0px;
+}
+#event,#ev_t{
+  visibility: hidden;
 }
 
 #container_main{

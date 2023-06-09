@@ -31,3 +31,8 @@ speech.onend = () => {
 speech.start() 
 };
 //--------------------------------//
+
+function start_speech(){
+    console.log("start_byfunc");
+    speech.start();
+}
