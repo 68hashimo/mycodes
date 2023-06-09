@@ -26,7 +26,7 @@
       <p class="main-contents"></p>
     </div>
     <div class="container" id="container_main">
-      <button onclick="location.href='get_cok.html'">語句を登録</button>
+      <button id ="reg" onclick="link_getcok()">語句を登録</button>
       <button id="t_cok" onclick="start_speech()">文字起こし</button>
       <button id="event">event</button>
       <button id="ev_t">event_test</button>
@@ -120,7 +120,7 @@
       </div>
 
       <div><!--文字起こし-->
-        <button id="btn">文字起こし</button>
+        <button id="btn">文字起こし_init</button>
         <div id="content"></div>
       </div>
       <p>相手の文字起こし</p>
@@ -140,5 +140,6 @@
     <script src="js/script.js"></script>
     <script src="js/speech.js"></script>
     <script src="js/notification.js"></script>
+    <script src="js/param.js"></script>
   </body>
 </html>

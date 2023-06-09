@@ -38,14 +38,14 @@ body{
 }
 #js-local-text{
     position:absolute;
-    top: 35px;
+    top: 5px;
     font-size: 24px;
     right:141px;
     width:25%
 }
 #js-send-trigger{
     position:absolute;
-    top:35px;
+    top:5px;
     font-size:18px;
     right:82px;
 }
@@ -67,9 +67,10 @@ body{
 
 #js-leave-trigger{
     position:absolute;
-    top: 0px;
+    top: 5px;
     font-size: 18px;
     right:22px;
+    color:crimson
 }
 
 #js-meta,.note,#js-room-mode{
@@ -86,4 +87,12 @@ body{
 }
 #loc_top{
   font-size: 25px;
+}
+#reg{
+  position: absolute;
+  top:10px;
+}
+#t_cok{
+  position: absolute;
+  top:40px;
 }
