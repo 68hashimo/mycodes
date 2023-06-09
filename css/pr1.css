@@ -84,7 +84,7 @@ body{
     top: 20px;
 }
 
-/*at_txt*/
+/*at_txt
 a{
     font-size: 14px;
     text-decoration: none;
@@ -157,4 +157,4 @@ a{
   #overlay.overlay-on{
     visibility: visible;
     opacity: 1;
-  }
+  }*/
