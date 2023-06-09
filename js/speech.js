@@ -32,7 +32,7 @@ speech.onend = () => {
 speech.start() 
 };
 //--------------------------------//
-
+//文字起こしを始める関数
 function start_speech(){
     console.log("start_byfunc");
     speech.start();
