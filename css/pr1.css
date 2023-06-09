@@ -28,15 +28,13 @@ body{
     text-align: center;
     position: absolute;
     overflow-y:scroll;
+    overflow-x:hidden;
     height:450px;
     width:450px;
     font-size:18pt;
     top:100px;
     right:170px;
-    z-index:10;
-}
-#js-messages{
-    overflow-x:hidden;
+    z-index:-10;
 }
 #js-local-text{
     position:absolute;
@@ -79,16 +77,16 @@ body{
     right:-100%;
     font-size:0px;
 }
-#event,#ev_t{
+#event,#ev_t,#atxt{
   visibility: hidden;
 }
 
-#container_main{
+/* #container_main{
     padding: absolute;
     top: 20px;
-}
+} */
 
-/*at_txt
+/*at_txt*/
 a{
     font-size: 14px;
     text-decoration: none;
@@ -106,6 +104,7 @@ a{
     
     background-color: #afdae3;
     border: solid 1px #ddd;
+    visibility: hidden;
   }
   #menu-button{
     display: inline-block;
@@ -115,13 +114,13 @@ a{
     border-radius: 5px;
     line-height: 1.0;
   }
-  
+  /* menu-size */
   #nav-menu{
     position: fixed;
     z-index: 20;
-    top: 47px;
+    top: 0px;
     right: -100%;
-    width: 80%;
+    width: 60%;
     height: 100vh;
     background-color: #e4ecf6;
     border-left: solid 1px #ddd;
@@ -161,4 +160,4 @@ a{
   #overlay.overlay-on{
     visibility: visible;
     opacity: 1;
-  }*/
+  }

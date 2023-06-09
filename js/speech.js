@@ -3,6 +3,7 @@ speech.lang = 'ja-JP';
           
 const btn = document.getElementById('btn');
 const content = document.getElementById('content');
+const mymoji = document.getElementById('menu_mymoji');
 btn.addEventListener('click' , function() {
     // 音声認識をスタート
     console.log("start");
@@ -19,8 +20,8 @@ speech.onresult = function(e) {
         var expire = new Date();
         expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
         console.log(e);
-        content.innerHTML += '<div>'+ autotext +'</div>';
-        speechm(autotext);
+        mymoji.innerHTML += '<div>'+ userm()+";"+autotext +'</div>';
+        //speechm(autotext);
         document.cookie = "autotxt="+autotext+'; expires=' + expire.toUTCString();
         ev_click();
     }

@@ -3,6 +3,7 @@ const ev = document.getElementById('ev_t');
 const join_t=document.getElementById('js-join-trigger');
 const autotx_btn=document.getElementById('btn');
 
+
 function cut(tx){
     let i =1;
     let j=0;
@@ -32,12 +33,13 @@ function cut(tx){
 
 
 //notification
-function notify(){
-    Push.create('こんにちは',{
-      bpdy:'test message',
+function notify(n,n_str){
+    var ls_notify=["ルームに参加しました",'登録した語句を検知しました'];
+    var notify_text=ls_notify[n];
+    Push.create(notify_text,{
+      body:n_str,
       onClick:function(){
-          this.close()
-          
+          this.close()  
       }  
     });
 }
@@ -54,7 +56,7 @@ function userm(){
     //document.getElementById("txt_cok").innerHTML=text2;
 }
 
-//receive
+//receive_name
 
 window.onload = function(){
     var data = location.href.split("=")[1];
@@ -99,10 +101,19 @@ document.addEventListener('DOMContentLoaded', function(){
       }else{
         menuButton.textContent = 'メニューを開く'
       }
-      
       navMenu.classList.toggle('nav-menu-open');
       overlay.classList.toggle('overlay-on');
     }
+
+    document.addEventListener('keydown', (e)=> { 
+        if(e.key === "a" || e.key === "A") { 
+            navMenu.classList.toggle('nav-menu-open');
+            overlay.classList.toggle('overlay-on');
+            //console.log("keydown_a");
+
+          // Aが押された時に実行したい処理を記述
+        }
+      });
   
     const menuEvent = document.getElementsByClassName('menu-event');
     for(let i = 0; i < menuEvent.length; i++) {

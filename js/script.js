@@ -14,7 +14,8 @@ at=false;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
   const evc = document.getElementById('event');
-  const atxt = document.getElementById('atxt');
+  //const atxt = document.getElementById('atxt');
+  const roommoji = document.getElementById('menu_roommoji');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -188,16 +189,15 @@ at=false;
       newVideo.setAttribute('data-peer-id', stream.peerId);
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
-      //var user = userm();
-      notify();
+      //notify(0,"ルームに参加");
       //if (user != 'customer'){notify();}
     });
 
     room.on('data', ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       if(typeof(data)=="object"){
-        console.log(data.msg);
-        atxt.innerHTML += '<div>'+ String(data.msg) +'</div>';
+        console.log(atxt);
+        roommoji.innerHTML += '<div>'+ userm()+';'+String(data.msg) +'</div>';
         speechm(String(data.msg));
         return
       }
