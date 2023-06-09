@@ -16,6 +16,7 @@ at=false;
   const evc = document.getElementById('event');
   //const atxt = document.getElementById('atxt');
   const roommoji = document.getElementById('menu_roommoji');
+  const mymoji=document.getElementById("menu_mymoji");
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -219,6 +220,8 @@ at=false;
 
       messages.textContent += `=== ${"2"}退出しました ===\n`;
       messages.textContent = null;
+      roommoji.innerHTML="ルームの文字起こし";
+      mymoji.innerHTML="あなたの文字起こし";
     });
     // for closing myself
     room.once('close', () => {
