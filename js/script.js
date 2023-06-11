@@ -198,7 +198,7 @@ at=false;
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       if(typeof(data)=="object"){
         console.log(atxt);
-        roommoji.innerHTML += '<div>'+ userm()+';'+String(data.msg) +'</div>';
+        roommoji.innerHTML += '<div>'+ String(data.msg) +'</div>';
         speechm(String(data.msg));
         return
       }
@@ -267,7 +267,7 @@ at=false;
 
     function clg(){
       var automsg=autotxtcookie();
-      var autotxt = {pn:"mojiokoshi",msg:automsg};
+      var autotxt = {pn:"mojiokoshi",msg:userm()+';'+automsg};
       room.send(autotxt)
     }
 
