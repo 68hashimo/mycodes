@@ -190,7 +190,7 @@ at=false;
       newVideo.setAttribute('data-peer-id', stream.peerId);
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
-      //notify(0,"ルームに参加");
+      notify(0,"ルームに参加");
       //if (user != 'customer'){notify();}
     });
 
