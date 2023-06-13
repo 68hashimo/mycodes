@@ -37,12 +37,12 @@ function sendcookies(){
     var lst=GetCookies();
     //var lst_len=lst.length;
     //var txt_sp=txt.split(',');
-    console.log(txt_sp);
     var txt_sp=save_text();
     if(txt_sp==""){
         alert("not input");
         return
     }
+    console.log(txt_sp);
     var cok_num=spl()+1;
     txt_sp.forEach(function(val){
         if(val != "" && dist_s(lst,val)){
