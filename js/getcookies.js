@@ -18,6 +18,7 @@ function save_text(){
     console.log(moji_ls);
     return moji_ls;
 }
+
 function clear_inp(){
     el_ls.forEach(e => {
         e.value="";
@@ -31,17 +32,17 @@ function sendcookies(){
     var expire = new Date();
     expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
     const txt_id=document.getElementById("txt");
-    var txt=document.getElementById("txt").value+"hoge";
-    console.log(txt);
-    if(txt==""){
+    //var txt=document.getElementById("txt").value+"hoge";
+    //console.log(txt);
+    var lst=GetCookies();
+    //var lst_len=lst.length;
+    //var txt_sp=txt.split(',');
+    console.log(txt_sp);
+    var txt_sp=save_text();
+    if(txt_sp==""){
         alert("not input");
         return
     }
-    var lst=GetCookies();
-    //var lst_len=lst.length;
-    var txt_sp=txt.split(',');
-    console.log(txt_sp);
-    var txt_sp=save_text();
     var cok_num=spl()+1;
     txt_sp.forEach(function(val){
         if(val != "" && dist_s(lst,val)){
@@ -49,7 +50,7 @@ function sendcookies(){
             cok_num+=1;
         }
     })
-    txt_id.value = '';
+    //txt_id.value = '';
     alert('complete');
     clear_inp();
     load();
