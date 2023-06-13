@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     document.addEventListener('keydown', (e)=> { 
-        if(e.altKey) {
-            if(e.key === "a" || e.key === "A"){
+        if(e.shiftKey) {
+            if(e.ctrlKey){
                 navMenu.classList.toggle('nav-menu-open');
                 overlay.classList.toggle('overlay-on');
                 //console.log("keydown_a");
