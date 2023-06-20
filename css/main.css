@@ -1,11 +1,11 @@
 /* チャット */
 .chat {
     position: absolute;
-    width: 25%;
-    height: 75%;
-    left: 25%;
+    width: 24.7%;
+    height: 90%;
+    right: 0;
     top: 0;
-    background: #000000;
+    background: #ffffff;
     border: 1px solid #000000;
   }
   
@@ -25,7 +25,7 @@
   }
 
   .content video {
-    width: calc(33% - 10px); /* 画面の横幅を3分割し、間隔を考慮して幅を設定 */
+    width: calc(66% - 10px); /* 画面の横幅を3分割し、間隔を考慮して幅を設定 */
     height: 220px;
     margin-bottom: 10px;
   }
