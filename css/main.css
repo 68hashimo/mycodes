@@ -5,6 +5,7 @@
     height: 90%;
     right: 0;
     top: 0;
+    overflow-y: scroll;
     background: #ffffff;
     border: 1px solid #000000;
   }
