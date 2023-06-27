@@ -37,3 +37,8 @@ function start_speech(){
     console.log("start_byfunc");
     speech.start();
 }
+
+// function stop_speech(){
+//     console.log("stop_byfunc");
+//     speech.stop();
+// }

@@ -81,7 +81,7 @@ function Cookies()
     console.log(GCookies());
 }
 window.addEventListener('load', function(){
-    console.log("load：リソースファイルを全て読み込みました。");
+    console.log("load: リソースファイルを全て読み込みました。");
     setTimeout(function(){
         join_t.click();
         ev.click();
