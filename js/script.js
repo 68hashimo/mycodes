@@ -128,9 +128,11 @@ at=false;
     if (audioTracks.length > 0 && audioTracks[0].enabled) {
       audioTracks.forEach(mtrack => mtrack.enabled = false);
       micImage.src = "img/muted.png";
+      f_mute()
     } else {
       audioTracks.forEach(mtrack => mtrack.enabled = true);
       micImage.src = "img/mic.png";
+      f_mute()
     }
   }
   

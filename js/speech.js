@@ -1,3 +1,4 @@
+var flg_mute=true;
 const speech = new webkitSpeechRecognition();
 speech.lang = 'ja-JP';
           
@@ -20,10 +21,18 @@ speech.onresult = function(e) {
         var expire = new Date();
         expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
         console.log(e);
-        mymoji.innerHTML += '<div>'+ userm()+";"+autotext +'</div>';
+        if(flg_mute){
+            mymoji.innerHTML += '<div>'+ userm()+";"+autotext +'</div>';
+        }else{
+            console.log('hoge');
+        }
         //speechm(autotext);
         document.cookie = "autotxt="+autotext+'; expires=' + expire.toUTCString();
-        ev_click();
+        if(flg_mute){
+            ev_click();
+        }else{
+            console.log('moge');
+        }        
     }
 }
               
@@ -36,6 +45,14 @@ speech.start()
 function start_speech(){
     console.log("start_byfunc");
     speech.start();
+}
+
+function f_mute(){
+    if(flg_mute){
+        flg_mute=false;
+    }else{
+        flg_mute=true;
+    }
 }
 
 // function stop_speech(){
