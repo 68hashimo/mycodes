@@ -2,6 +2,10 @@ const t_cok=document.getElementById("t_cok");
 const ev = document.getElementById('ev_t');
 const join_t=document.getElementById('js-join-trigger');
 const autotx_btn=document.getElementById('btn');
+const check_stream=document.getElementById('check_stream');
+const localV = document.getElementById('js-local-stream');
+const remoteV = document.getElementById('js-remote-streams');
+const r_img=document.getElementById('r_img');
 
 
 function cut(tx){
@@ -122,4 +126,17 @@ document.addEventListener('DOMContentLoaded', function(){
   
   }, false);
 // ev.style.visibility="hidden"
+check_stream.addEventListener('click',()=>{
+        if(check_stream.checked){
+            localV.style.visibility='hidden';
+            remoteV.style.visibility='hidden';
+            r_img.style.visibility='visible'
+        }else{
+            localV.style.visibility='visible';
+            remoteV.style.visibility='visible';
+            r_img.style.visibility='hidden';
+        }
+    }
+)
+
 ev.addEventListener('click',Cookies);
