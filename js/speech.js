@@ -13,7 +13,7 @@ btn.addEventListener('click' , function() {
           
 //---------------追記---------------//
 //音声自動文字起こし機能
-  
+
 speech.onresult = function(e) {
     speech.stop();
     if(e.results[0].isFinal){
