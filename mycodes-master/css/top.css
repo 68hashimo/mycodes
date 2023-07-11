@@ -1,0 +1,10 @@
+body{
+    background-color: #e0ffff;
+}
+
+#stt{
+    font-size:50px;
+    position:absolute;
+    top:50%;
+    left:45%
+}

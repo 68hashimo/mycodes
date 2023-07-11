@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>videochat</title>
+    <link rel="stylesheet" href="css/pr1.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+  </head>
+  <body>
+    <div class="container">
+      <a href="top.html">top</a><br>
+      <a href="get_cok.html">語句を登録</a>
+      <button id="t_cok" onclick="Cookies()">登録されている語句を表示</button>
+      <button id="event">event</button>
+      <button id="ev_t">event_test</button>
+      <div id = "txt_cok">
+
+      </div>
+      <h1 class="heading">例の部屋</h1>
+      <p class="note">
+        Change Room mode (before join in a room):
+        <a href="#">mesh</a> / <a href="#sfu">sfu</a>
+      </p>
+      <div class="room">
+        <div class="remote-streams" id="js-remote-streams"></div>
+        <div class="box content">
+          <div>
+            <video id="js-local-stream"></video>
+            <span id="js-room-mode"></span>
+            <!--<input type="text" placeholder="Room Name" id="js-room-id">-->
+            <button id="js-join-trigger">参加</button>
+            <button id="js-leave-trigger">退出</button>
+        </div>
+      </div>
+
+    
+        <div><!---チャット-->
+          <div class="box send"> 送信など
+
+            <pre class="messages" id="js-messages"></pre>
+            <input type="text" id="js-local-text">
+            <button id="js-send-trigger">送る</button>
+          </div>
+
+        </div>
+
+        <div>
+            <!----ここからミュート機能-->
+            <div class="box botom">
+              <button type="button" name="camera" id="camera-button" ><img src="img/camera.png"></button>
+              <button type="button" name="micmute" id="mic-button"><img src="img/mic.png"></button>
+            </div>
+
+        </div>
+
+        <div><!--文字起こし-->
+          <button id="btn">文字起こし</button>
+          <div id="content"></div>
+    
+
+          <script>
+        
+              const speech = new webkitSpeechRecognition();
+              speech.lang = 'ja-JP';
+          
+              const btn = document.getElementById('btn');
+              const content = document.getElementById('content');
+              btn.addEventListener('click' , function() {
+              // 音声認識をスタート
+              console.log("start");
+              speech.start();
+              });
+          
+              //---------------追記---------------//
+              //音声自動文字起こし機能
+              
+              speech.onresult = function(e) {
+                  speech.stop();
+                  if(e.results[0].isFinal){
+                      var autotext =  e.results[0][0].transcript
+                      var expire = new Date();
+                      expire.setTime( expire.getTime() + 1000 * 3600 * 24*365 );
+                      console.log(e);
+                      content.innerHTML += '<div>'+ autotext +'</div>';
+                      speechm(autotext);
+                      document.cookie = "autotxt="+autotext+'; expires=' + expire.toUTCString();
+                      ev_click();
+                    }
+              }
+              
+          
+              speech.onend = () => { 
+                  speech.start() 
+              };
+              //--------------------------------//
+          
+          </script>
+
+          <script type="text/javascript">
+            var now = new Date();
+            function LoadProc() {
+              var target = document.getElementById("DateTimeDisp");
+
+              var Hour = now.getHours();
+              var Min = now.getMinutes();
+
+
+              target.innerHTML =Hour + ":" + Min;
+            }
+
+          </script>
+
+          <table>
+          <tr>
+          <td><button type="button" id="notif" onclick="return notif()"><img src="img/good.png" width="30" height="30"></button></td>
+          <td><button type="button" id="notif" onclick="return notif2()"><img src="img/change.png" width="30" height="30"></button></td>
+          <td><button type="button" id="notif" onclick="return notif3()"><img src="img/mark.png" width="30" height="30"></button></td>
+          </tr>
+          </table>
+       </div>
+      </div>
+      <p>相手の文字起こし</p>
+      <div id="atxt">
+      </div>        
+      <p class="meta" id="js-meta"></p>
+    </div>
+    <div>
+      
+    </div>
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script>
+    <script src="../_shared/key.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="js/mjs.js"></script>
+    <script src="js/mojiokoshi.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/notification.js"></script>
+  </body>
+</html>
