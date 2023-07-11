@@ -13,6 +13,7 @@
 .content {
   /* コンテンツ領域 */
   position: absolute;
+  box-sizing: border-box;
   width: 75%;
   height: 75%;
   left: 0;
@@ -26,9 +27,10 @@
 }
 
 .content video {
-  width: calc(66% - 10px); /* 画面の横幅を3分割し、間隔を考慮して幅を設定 */
-  height: 220px;
-  margin-bottom: 10px;
+  flex: 0 1 calc(33% - 10px); /* 画面の横幅を3分割し、間隔を考慮して幅を設定 */
+  height: 150px;
+  margin: 1%;
+  margin-bottom: 5px;
 }
 
 .botom {
