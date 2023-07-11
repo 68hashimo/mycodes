@@ -14,9 +14,7 @@ at=false;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
   const evc = document.getElementById('event');
-  //const atxt = document.getElementById('atxt');
-  const roommoji = document.getElementById('menu_roommoji');
-  const mymoji=document.getElementById("menu_mymoji");
+  const atxt = document.getElementById('atxt');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -101,17 +99,19 @@ at=false;
   min();
   */
 
-
   function toggleCamera() {
     const videoTracks = localStream.getVideoTracks();
     const cameraButton = document.getElementById("camera-button");
     const cameraImage = document.querySelector("#camera-button img");
   
     if (videoTracks.length > 0 && videoTracks[0].enabled) {
-      videoTracks.forEach(ctrack => ctrack.enabled = false);
+      videoTracks.forEach(ctrack => ctrack.enabled = false);  
+      //messages.innerHTML += userm()+'は離席しています\n';
       cameraImage.src = "img/Ban.png";
+      
     } else {
       videoTracks.forEach(ctrack => ctrack.enabled = true);
+      //messages.textContent += userm()+'が戻りました\n';
       cameraImage.src = "img/camera.png";
     }
   }
@@ -128,11 +128,9 @@ at=false;
     if (audioTracks.length > 0 && audioTracks[0].enabled) {
       audioTracks.forEach(mtrack => mtrack.enabled = false);
       micImage.src = "img/muted.png";
-      f_mute()
     } else {
       audioTracks.forEach(mtrack => mtrack.enabled = true);
       micImage.src = "img/mic.png";
-      f_mute()
     }
   }
   
@@ -143,6 +141,7 @@ at=false;
 
   // Render local stream
   localVideo.muted = true;
+  localVideo.insertAdjacentHTML("afterend",userm()); 
   localVideo.srcObject = localStream;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
@@ -184,6 +183,9 @@ at=false;
     });
 
     // Render remote stream for new peer join in the room
+    //let result = location.href.split('=');
+    //var username = result[1];
+    //console.log(result[1]);
     room.on('stream', async stream => {
       const newVideo = document.createElement('video');
       newVideo.srcObject = stream;
@@ -191,25 +193,29 @@ at=false;
       // mark peerId to find it later at peerLeave event
       newVideo.setAttribute('data-peer-id', stream.peerId);
       remoteVideos.append(newVideo);
+      //remoteVideos.insertAdjacentHTML("afterend",user[0]); 
       await newVideo.play().catch(console.error);
-      notify(0,"ルームに参加");
+      //var user = userm();
+      notify();
       //if (user != 'customer'){notify();}
     });
 
     room.on('data', ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       if(typeof(data)=="object"){
-        console.log(atxt);
-        roommoji.innerHTML += '<div>'+ String(data.msg) +'</div>';
+        console.log(data.msg);
+        atxt.innerHTML += '<div>'+ String(data.msg) +'</div>';
         speechm(String(data.msg));
         return
       }
       var user = data.split(":");
       messages.textContent += `${user[0]}: ${cut(user[1])}\n`;
       console.log(data);
+      remoteVideos.insertAdjacentHTML("afterend",user[0]);
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
     });
+
 
     // for closing room members
     room.on('peerLeave', peerId => {
@@ -222,8 +228,6 @@ at=false;
 
       messages.textContent += `=== ${"2"}退出しました ===\n`;
       messages.textContent = null;
-      roommoji.innerHTML="ルームの文字起こし";
-      mymoji.innerHTML="あなたの文字起こし";
     });
     // for closing myself
     room.once('close', () => {
@@ -269,7 +273,7 @@ at=false;
 
     function clg(){
       var automsg=autotxtcookie();
-      var autotxt = {pn:"mojiokoshi",msg:userm()+';'+automsg};
+      var autotxt = {pn:"mojiokoshi",msg:automsg};
       room.send(autotxt)
     }
 
