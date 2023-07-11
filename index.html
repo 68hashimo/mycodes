@@ -4,39 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>videochat</title>
-    <!-- <link rel="stylesheet" href="css/pr1.css"> -->
-    <link rel="stylesheet" href="css/style_moji.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pr1.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
   </head>
   <body>
-    <div class=""></div>
-    <div id="overlay" class="menu-event"></div>
-    <div id="menu-bar">
-      <a href="#" id="menu-button" class="menu-event">メニューを開く</a>
-    </div>
-    <nav id="nav-menu">
-      <ul>
-        <li><a id='loc_top' href="top.html">top</a><br></li>
-        <li><h3>・文字起こし</h3></li>
-        <li><p id="menu_mymoji">☆あなたの文字起こし</p></li>
-        <li><p id="menu_roommoji">☆ルームの文字起こし</p></li>
-      </ul>
-    </nav>
-    <div id="contents">
-      <p class="main-contents"></p>
-    </div>
-    <div class="container" id="container_main">
-      <button id ="reg" onclick="link_getcok()">語句を登録</button>
-      <button id="t_cok" onclick="start_speech()">文字起こし</button>
+    <div class="container">
+      <a href="top.html">top</a><br>
+      <a href="get_cok.html">語句を登録</a>
+      <button id="t_cok" onclick="Cookies()">登録されている語句を表示</button>
       <button id="event">event</button>
       <button id="ev_t">event_test</button>
       <div id = "txt_cok">
+
       </div>
-      
       <h1 class="heading">例の部屋</h1>
-      <div >
-        <!-- <img id="r_img" src="img/omocha_robot.png" height='500' width="500"> -->
-      </div>
       <p class="note">
         Change Room mode (before join in a room):
         <a href="#">mesh</a> / <a href="#sfu">sfu</a>
@@ -48,26 +29,38 @@
             <video id="js-local-stream"></video>
             <span id="js-room-mode"></span>
             <!--<input type="text" placeholder="Room Name" id="js-room-id">-->
-      </div>
-
-      <div><!---チャット-->
-        <div class="box send">
-          <pre class="messages" id="js-messages"></pre>
-          <input type="text" id="js-local-text">
-          <button id="js-send-trigger">送る</button>
+            <button id="js-join-trigger">参加</button>
+            <button id="js-leave-trigger">退出</button>
         </div>
       </div>
 
-      <div>
-          <!----ここからミュート機能-->
-          <div class="box botom">
-            <button type="button" name="camera" id="camera-button" ><img src="img/camera.png"></button>
-            <button type="button" name="micmute" id="mic-button"><img src="img/mic.png"></button>
-            <button id="js-join-trigger">参加</button>
-            <button id="js-leave-trigger">退出</button>
+    
+        <div><!---チャット-->
+          <div class="box send"> 送信など
+
+            <pre class="messages" id="js-messages"></pre>
+            <input type="text" id="js-local-text">
+            <button id="js-send-trigger">送る</button>
           </div>
-      </div>
-          <!-- <script>
+
+        </div>
+
+        <div>
+            <!----ここからミュート機能-->
+            <div class="box botom">
+              <button type="button" name="camera" id="camera-button" ><img src="img/camera.png"></button>
+              <button type="button" name="micmute" id="mic-button"><img src="img/mic.png"></button>
+            </div>
+
+        </div>
+
+        <div><!--文字起こし-->
+          <button id="btn">文字起こし</button>
+          <div id="content"></div>
+    
+
+          <script>
+        
               const speech = new webkitSpeechRecognition();
               speech.lang = 'ja-JP';
           
@@ -100,36 +93,32 @@
               speech.onend = () => { 
                   speech.start() 
               };
-          </script> -->
-      <div>
-        <script type="text/javascript">
-          var now = new Date();
-          function LoadProc() {
-            var target = document.getElementById("DateTimeDisp");
+              //--------------------------------//
+          
+          </script>
 
-            var Hour = now.getHours();
-            var Min = now.getMinutes();
+          <script type="text/javascript">
+            var now = new Date();
+            function LoadProc() {
+              var target = document.getElementById("DateTimeDisp");
 
-
-            target.innerHTML =Hour + ":" + Min;
-          }
-
-        </script>
+              var Hour = now.getHours();
+              var Min = now.getMinutes();
 
 
-        <button type="button" id="notif" onclick="return notif()"><img src="img/good.png" width="30" height="30"></button>
-        <button type="button" id="notif" onclick="return notif2()"><img src="img/change.png" width="30" height="30"></button>
-        <button type="button" id="notif" onclick="return notif3()"><img src="img/mark.png" width="30" height="30"></button>
-      </div>
+              target.innerHTML =Hour + ":" + Min;
+            }
 
-      <div id="stream">
-        <input type="checkbox" id="check_stream" value='true'>
-        <label for="check_stream">streamを表示</label>
-      </div>
+          </script>
 
-      <div><!--文字起こし-->
-        <button id="btn">文字起こし_init</button>
-        <div id="content"></div>
+          <table>
+          <tr>
+          <td><button type="button" id="notif" onclick="return notif()"><img src="img/good.png" width="30" height="30"></button></td>
+          <td><button type="button" id="notif" onclick="return notif2()"><img src="img/change.png" width="30" height="30"></button></td>
+          <td><button type="button" id="notif" onclick="return notif3()"><img src="img/mark.png" width="30" height="30"></button></td>
+          </tr>
+          </table>
+       </div>
       </div>
       <p>相手の文字起こし</p>
       <div id="atxt">
@@ -146,8 +135,6 @@
     <script src="js/mjs.js"></script>
     <script src="js/mojiokoshi.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/speech.js"></script>
     <script src="js/notification.js"></script>
-    <script src="js/param.js"></script>
   </body>
 </html>
