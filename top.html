@@ -6,19 +6,24 @@
             top page
         </title>
         <link rel="stylesheet" href="css/top.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     </head>  
-    <body>
-        <h1>
-            top page
-        </h1>
-
-        <script src="js/top.js"></script>  
-        <div id="stt">
-            <label for="rname">input your name: </label>
-            <input type ="text" id =rname>
-            <button id = name_bt onclick=joined()>決定</button>
-            <a  href="index.html" id= start>start</a>
+    <body id = 'body_s'>
+        <section class="hero is-info is-medium">
+            <div class="hero-body">
+              <p class="title">
+                top page
+              </p>
+            <div id="stt">      
+                <div class = "container">
+                    <label class = 'label' for="rname">input your name: </label>
+                    <input class = "input is-info" type ="text" id =rname placeholder="input your name">
+                    <button class="button is-danger" id = name_bt onclick=joined()>決定</button>
+                </div>
+                <!-- <a  href="index.html" id= start>start</a> -->
+            </div>
         </div>
+        </section>
 <!--
         <div>
             <label><input type="radio" name="rl" value="customer">customer</label>
@@ -30,4 +35,5 @@
         <div id="tn">
         </div>      
     </body>
+    <script src="js/top.js"></script>  
 </html>

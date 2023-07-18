@@ -68,8 +68,12 @@ a{
     opacity: 0;
     background: rgba(0,0,0,0.6);
     transition: all 0.5s ease-out;
-  }
+}
   #overlay.overlay-on{
     visibility: visible;
     opacity: 1;
   }
+  
+#js-meta,#js-room-mode{
+  visibility: hidden;
+}
