@@ -74,6 +74,6 @@ a{
     opacity: 1;
   }
   
-#js-meta,#js-room-mode{
+#js-meta,#js-room-mode,#ev_t{
   visibility: hidden;
 }

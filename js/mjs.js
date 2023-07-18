@@ -84,9 +84,10 @@ window.addEventListener('load', function(){
     console.log("load: リソースファイルを全て読み込みました。");
     setTimeout(function(){
         join_t.click();
+
         ev.click();
-        //autotx_btn.click();
-        console.log(join_t);
+        autotx_btn.click();
+        // console.log(join_t);
     },2000);    
 });
 
