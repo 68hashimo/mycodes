@@ -16,6 +16,12 @@
     </div>
     <nav id="nav-menu">
       <ul>
+        <li>
+          <div id="stream">
+            <input type="checkbox" id="check_stream" value='true'>
+            <label for="check_stream">streamを非表示</label>
+          </div>
+        </li>
         <li><a id='loc_top' href="top.html">top</a><br></li>
         <li><h3>・文字起こし</h3></li>
         <li><p id="menu_mymoji">☆あなたの文字起こし</p></li>
@@ -34,9 +40,9 @@
       </div>
       
       <h1 class="heading">例の部屋</h1>
-      <div >
-        <!-- <img id="r_img" src="img/omocha_robot.png" height='500' width="500"> -->
-      </div>
+      <!-- <div>
+        <img id="r_img" src="img/omocha_robot.png" height='500' width="500">
+      </div> -->
       <p class="note">
         Change Room mode (before join in a room):
         <a href="#">mesh</a> / <a href="#sfu">sfu</a>
@@ -116,11 +122,6 @@
           <button type="button" id="notif" onclick="return notif2()"><img src="img/change.png" width="30" height="30"></button>
           <button type="button" id="notif" onclick="return notif3()"><img src="img/mark.png" width="30" height="30"></button>
         </div>
-      </div>
-
-      <div id="stream">
-        <input type="checkbox" id="check_stream" value='true'>
-        <label for="check_stream">streamを表示</label>
       </div>
 
       <div><!--文字起こし-->
