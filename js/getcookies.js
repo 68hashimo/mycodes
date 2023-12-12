@@ -89,11 +89,12 @@ function dist_s(lst,val){
 function GetCookies()
 {
     let list=[];
-    var r = document.cookie.split(';'); 
+    var r = document.cookie.split(';');
     r.forEach(function(value) { 
     //cookie名と値に分ける
         var content = value.split('=');
-        if(content[0]!="autotxt"){
+        if(content[0].includes("name")){//文字起こしの記録を除外
+            console.log(content[0])
             list.push( content[1] );
         }
         //console.log( content[1] );
@@ -187,6 +188,11 @@ function spl(){
         }catch(e){
             console.log("name isnot number");
         }        
+    }
+    for(var i=0;i<ls_num.length;i++){
+        if(isNaN(ls_num[i])){
+            ls_num.splice(i,1)//数値でない場合除外
+        }
     }
     var vlmax = Math.max(...ls_num);
     console.log(vlmax,ls_num);
