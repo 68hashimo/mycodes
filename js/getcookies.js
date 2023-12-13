@@ -94,7 +94,6 @@ function GetCookies()
     //cookie名と値に分ける
         var content = value.split('=');
         if(content[0].includes("name")){//文字起こしの記録を除外
-            console.log(content[0])
             list.push( content[1] );
         }
         //console.log( content[1] );
@@ -111,6 +110,18 @@ function wrt(){
     var chk_cok = document.cookie; 
     s.innerHTML="";
     //s.appendChild(br);
+    var checkcok=chk_cok.split(';')
+    console.log(checkcok)
+    var clist=[]
+    for(e of checkcok){
+        console.log(e.split('=')[0])
+        clist.push(e.split('=')[0])
+    }
+    console.log(clist)
+    if(clist.includes&&clist.length==1){
+        s.innerHTML="登録されている語句はありません"
+        return
+    }
     if(chk_cok !=""){
         for(var w = 0;w<gcok.length;w++){
             var idnum = 'idnum'+w;
@@ -195,6 +206,10 @@ function spl(){
         }
     }
     var vlmax = Math.max(...ls_num);
+    console.log(isFinite(vlmax))
+    if(!isFinite(vlmax)){
+        vlmax=0
+    }
     console.log(vlmax,ls_num);
     //div.innerHTML=ls_num;
     ls_num=[];
