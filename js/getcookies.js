@@ -118,7 +118,7 @@ function wrt(){
         clist.push(e.split('=')[0])
     }
     console.log(clist)
-    if(clist.includes&&clist.length==1){
+    if(clist.includes('autotxt')&&clist.length==1){
         s.innerHTML="登録されている語句はありません"
         return
     }
