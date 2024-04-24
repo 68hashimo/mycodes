@@ -169,7 +169,7 @@ at=false;
     
     var check_type=Object.prototype.toString;
 
-    const room = peer.joinRoom("roomId", {
+    const room = peer.joinRoom("roomId_2", {
       //roomId.valueが元値
       mode: getRoomModeByHash(),
       stream: localStream,
