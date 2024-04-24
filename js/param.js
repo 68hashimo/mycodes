@@ -7,7 +7,7 @@ function link_getcok(){
     }
     //location.href = "get_cok.html?"+"rid="+lu_name;
     var moji_location="get_cok.html?"+"rid="+lu_name;
-    var newWindow = window.open(moji_location, '語句登録', 'top=100,left=100,width=700,height=500');
+    var newWindow = window.open(moji_location,'_blank','top=100,left=100,width=700,height=500');
     if( newWindow ) {
     console.log('正常に開きました');
     }
