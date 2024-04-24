@@ -211,7 +211,7 @@ at=false;
       if(typeof(data)=="object"){
         if(data.pn=='username'){
           console.log(data.msg)
-          notify(0,data.msg+"ルームに参加");
+          notify(0,data.msg+"がルームに参加しました");
           return
         }else{
         console.log(atxt);
