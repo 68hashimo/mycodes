@@ -5,7 +5,16 @@ function link_getcok(){
     }catch(e){
         var lu_name="no name";
     }
-    location.href = "get_cok.html?"+"rid="+lu_name;
+    //location.href = "get_cok.html?"+"rid="+lu_name;
+    var moji_location="get_cok.html?"+"rid="+lu_name;
+    var newWindow = window.open(moji_location, '語句登録', 'top=100,left=100,width=700,height=500');
+    if( newWindow ) {
+    console.log('正常に開きました');
+    }
+    else {
+    console.log('正常に開けませんでした！');
+    newWindow.close();
+    }
 }
 
 function link_index(){
@@ -18,5 +27,6 @@ function link_index(){
     }catch(e){
         var lu_name="no_name";
     }
-    location.href = "index.html?"+"rid="+lu_name;
+    //location.href = "index.html?"+"rid="+lu_name;
+    window.close();
 }

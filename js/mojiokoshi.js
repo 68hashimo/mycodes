@@ -43,7 +43,7 @@ function autotxtcookie(){
 }
 
 
-
+//語句があれば通知
 function speechm(te){
     //content.innerHTML += "test"
     //const ls=["こんにちは","おはよう","漢字"];

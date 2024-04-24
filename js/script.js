@@ -177,6 +177,9 @@ at=false;
 
     room.once('open', () => {
       messages.textContent += '=== 参加しました ===\n';
+      var notifyname = {pn:"username",msg:userm()};
+      room.send(notifyname);
+      console.log(userm());
     });
     room.on('peerJoin', peerId => {
       messages.textContent += `=== 参加しました! ===\n`;
@@ -192,16 +195,20 @@ at=false;
       newVideo.setAttribute('data-peer-id', stream.peerId);
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
-      notify(0,"ルームに参加");
-      //if (user != 'customer'){notify();}
     });
 
     room.on('data', ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       if(typeof(data)=="object"){
+        if(data.pn=='username'){
+          notify(0,data.msg+"ルームに参加");
+          return
+        }
         console.log(atxt);
         roommoji.innerHTML += '<div>'+ String(data.msg) +'</div>';
         speechm(String(data.msg));
+        // let moji_container=document.getElementById("mojiokoshi_container");
+        // moji_container.scrollTo(0,moji_container.scrollHeight)
         return
       }
       var user = data.split(":");

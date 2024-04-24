@@ -47,7 +47,7 @@ function notify(n,n_str){
       }  
     });
 }
-//userm使っていない
+
 function userm(){
     try{
         var data2=location.href.split("=")[1];
