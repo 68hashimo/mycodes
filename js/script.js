@@ -174,12 +174,21 @@ at=false;
       mode: getRoomModeByHash(),
       stream: localStream,
     });
+    try{
+      var uname=location.href.split("=")[1];
+      var decode_name=decodeURI(uname);
+      console.log(decode_name);
+    }catch(e){
+        var decode_name="no name";
+        console.log(e);
+    }
+    uname='hoge'+decode_name;
+    var notifyname = {pn:"username",msg:decode_name};
 
     room.once('open', () => {
       messages.textContent += '=== 参加しました ===\n';
-      var notifyname = {pn:"username",msg:userm()};
       room.send(notifyname);
-      console.log(userm());
+      console.log(notifyname);
     });
     room.on('peerJoin', peerId => {
       messages.textContent += `=== 参加しました! ===\n`;
@@ -201,9 +210,10 @@ at=false;
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
       if(typeof(data)=="object"){
         if(data.pn=='username'){
+          console.log(data.msg)
           notify(0,data.msg+"ルームに参加");
           return
-        }
+        }else{
         console.log(atxt);
         roommoji.innerHTML += '<div>'+ String(data.msg) +'</div>';
         speechm(String(data.msg));
@@ -211,6 +221,7 @@ at=false;
         // moji_container.scrollTo(0,moji_container.scrollHeight)
         return
       }
+    }
       var user = data.split(":");
       messages.textContent += `${user[0]}: ${cut(user[1])}\n`;
       console.log(data);
