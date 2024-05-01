@@ -141,3 +141,19 @@ check_stream.addEventListener('click',()=>{
 )
 
 ev.addEventListener('click',Cookies);
+var pid
+function pid(str){
+    pid=str;
+}
+
+var user={pn:'joinuser',users:{}}
+function joinuser(key,id){
+    user.users[id]=key
+    console.log(user);
+    return user;
+}
+
+function updateUser(data){
+    user=data;
+    console.log(user);
+}

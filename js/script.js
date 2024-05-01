@@ -152,7 +152,11 @@ at=false;
     key: 'f810ebbb-3b29-4ebc-ae3c-d58c967be2e3',
     debug: 3,
   }));
-
+  // var streamname;
+  // function tryGetNeme(str){
+  //   streamname=str;
+  //   console.log(streamname);
+  // }
   // Register join handler
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
@@ -184,15 +188,28 @@ at=false;
     }
     uname='hoge'+decode_name;
     var notifyname = {pn:"username",msg:decode_name};
+    var joinname = {pn:"joinuser",msg:decode_name,prid:""};
 
-    room.once('open', () => {
+    //自分が参加したとき
+    room.once('open',async () => {
       messages.textContent += '=== 参加しました ===\n';
-      room.send(notifyname);
-      console.log(notifyname);
+      peer.listAllPeers((peers) => {
+        console.log(peers);
+        console.log('myid is '+peers[peers.length-1]);
+        joinname.prid=peers[peers.length-1]
+        joinuser(decode_name,peers[peers.length-1])
+      });
+      await room.send(notifyname);
     });
-    room.on('peerJoin', peerId => {
+    //他者が参加してきたとき
+    room.on('peerJoin',async peerId => {
       messages.textContent += `=== 参加しました! ===\n`;
-      console.log("ピアIDは:"+peerId);
+      await console.log("ピアIDは:"+peerId);
+      // await pid(peerId);
+      // console.log(joinname);
+      joinname.prid=peerId
+      //room.send(joinname);
+      //room.send(notifyname);
     });
 
     // Render remote stream for new peer join in the room
@@ -200,18 +217,42 @@ at=false;
       const newVideo = document.createElement('video');
       newVideo.srcObject = stream;
       newVideo.playsInline = true;
-      // mark peerId to find it later at peerLeave event
+      console.log(stream.peerId);
+      // mark peerId to find it later at peerLeave event 退出ユーザの識別
       newVideo.setAttribute('data-peer-id', stream.peerId);
       remoteVideos.append(newVideo);
       await newVideo.play().catch(console.error);
     });
 
-    room.on('data', ({ data, src }) => {
+    room.on('data', async ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
+      // var user={}
       if(typeof(data)=="object"){
         if(data.pn=='username'){
-          console.log(data.msg)
-          notify(0,data.msg+"がルームに参加しました");
+          notify(0,data.msg+"がルームに参加しました");//通知をする
+          //ビデオ要素の上から要素を表示したい
+          // const strVideo = document.createElement('div');
+          // strVideo.id='strvideo'+data.msg;
+          // strVideo.innerHTML=data.msg
+          try{
+            console.log("hog+"+data.msg);
+            peer.listAllPeers(async(peers) => {
+              console.log(peers);
+              console.log(data.msg+'@id is '+peers[peers.length-1]);
+              await room.send(joinuser(data.msg,peers[peers.length-1]));
+            });
+          }catch(e){
+            console.log(e)
+          }
+          return
+        }else if(data.pn=="joinuser"){
+          var key=data.msg;//名前をキーにする
+          try{
+            console.log(data);
+            updateUser(data);
+          }catch(e){
+            console.log(e);
+          }
           return
         }else{
         console.log(atxt);
@@ -234,6 +275,7 @@ at=false;
       const remoteVideo = remoteVideos.querySelector(
         `[data-peer-id="${peerId}"]`
       );
+      console.log(peerId);
       remoteVideo.srcObject.getTracks().forEach(track => track.stop());
       remoteVideo.srcObject = null;
       remoteVideo.remove();
