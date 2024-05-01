@@ -296,6 +296,7 @@ at=false;
         remoteVideo.remove();
       });
       location.href="top.html"
+      clearUser();
     });
 
     //--dataConnection-

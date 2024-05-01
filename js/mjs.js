@@ -157,3 +157,7 @@ function updateUser(data){
     user=data;
     console.log(user);
 }
+
+function clearUser(){
+    user={pn:'joinuser',users:{}}
+}
