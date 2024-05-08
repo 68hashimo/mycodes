@@ -148,14 +148,20 @@ function pid(str){
 
 var user={pn:'joinuser',users:{}}
 function joinuser(key,id){
-    user.users[id]=key
-    console.log(user);
+    if(key != null){
+        user.users[id]=key
+        console.log(user);
+    }
     return user;
 }
 
 function updateUser(data){
     user=data;
     console.log(user);
+}
+
+function removeUser(id){
+    delete user.users[id];
 }
 
 function clearUser(){

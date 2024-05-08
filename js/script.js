@@ -17,6 +17,7 @@ at=false;
   //const atxt = document.getElementById('atxt');
   const roommoji = document.getElementById('menu_roommoji');
   const mymoji=document.getElementById("menu_mymoji");
+  const strMyVideo = document.getElementById('strmyvideo');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -147,6 +148,7 @@ at=false;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
 
+
   // eslint-disable-next-line require-atomic-updates
   const peer = (window.peer = new Peer({
     key: 'f810ebbb-3b29-4ebc-ae3c-d58c967be2e3',
@@ -187,6 +189,8 @@ at=false;
         console.log(e);
     }
     uname='hoge'+decode_name;
+    strMyVideo.innerHTML=decode_name;
+    strMyVideo.style.zIndex=10;
     var notifyname = {pn:"username",msg:decode_name};
     var joinname = {pn:"joinuser",msg:decode_name,prid:""};
 
@@ -214,13 +218,23 @@ at=false;
 
     // Render remote stream for new peer join in the room
     room.on('stream', async stream => {
+      const remoteStream = document.createElement('div');
+      remoteStream.setAttribute('streamId',stream.peerId);
       const newVideo = document.createElement('video');
       newVideo.srcObject = stream;
       newVideo.playsInline = true;
       console.log(stream.peerId);
       // mark peerId to find it later at peerLeave event 退出ユーザの識別
       newVideo.setAttribute('data-peer-id', stream.peerId);
-      remoteVideos.append(newVideo);
+      //ビデオ要素の上から要素を表示したい
+      const strName = document.createElement('div');
+      strName.setAttribute('userName',stream.peerId);
+      strName.innerHTML='username';
+      strName.style.zIndex=10;
+      remoteStream.append(strName);
+      remoteStream.append(newVideo);
+      //remoteVideos.append(newVideo);
+      remoteVideos.append(remoteStream);
       await newVideo.play().catch(console.error);
     });
 
@@ -230,16 +244,23 @@ at=false;
       if(typeof(data)=="object"){
         if(data.pn=='username'){
           notify(0,data.msg+"がルームに参加しました");//通知をする
-          //ビデオ要素の上から要素を表示したい
-          // const strVideo = document.createElement('div');
-          // strVideo.id='strvideo'+data.msg;
-          // strVideo.innerHTML=data.msg
           try{
-            console.log("hog+"+data.msg);
+            //console.log("hog+"+data.msg);
             peer.listAllPeers(async(peers) => {
-              console.log(peers);
+              //console.log(peers);
               console.log(data.msg+'@id is '+peers[peers.length-1]);
               await room.send(joinuser(data.msg,peers[peers.length-1]));
+              const userlst=joinuser(null,null).users;
+              await Object.keys(userlst).forEach(async(id) => {
+                console.log(id,userlst[id])
+                var addName= await remoteVideos.querySelector(`[userName="${id}"]`);
+                try{
+                  addName.innerHTML=await userlst[id];
+                }catch(e){
+                  console.log(e);
+                  console.log(`peerid:${id},username:${userlst[id]}`);
+                }
+               });
             });
           }catch(e){
             console.log(e)
@@ -249,7 +270,18 @@ at=false;
           var key=data.msg;//名前をキーにする
           try{
             console.log(data);
-            updateUser(data);
+            await updateUser(data);
+            const userlst=joinuser(null,null).users;
+            await Object.keys(userlst).forEach(async(id) => {
+              console.log(id,userlst[id])
+              var addName= await remoteVideos.querySelector(`[userName="${id}"]`);
+              try{
+                addName.innerHTML=await userlst[id];
+              }catch(e){
+                console.log(e);
+                console.log(`peerid:${id},username:${userlst[id]}`);
+              }
+             })
           }catch(e){
             console.log(e);
           }
@@ -275,11 +307,16 @@ at=false;
       const remoteVideo = remoteVideos.querySelector(
         `[data-peer-id="${peerId}"]`
       );
-      console.log(peerId);
+      const userName = remoteVideos.querySelector(
+        `[userName="${peerId}"]`
+      );
+      //console.log(peerId);
       remoteVideo.srcObject.getTracks().forEach(track => track.stop());
       remoteVideo.srcObject = null;
       remoteVideo.remove();
-
+      userName.srcObject = null;
+      userName.remove();
+      removeUser(peerId);
       messages.textContent += `=== ${"2"}退出しました ===\n`;
       messages.textContent = null;
       roommoji.innerHTML="ルームの文字起こし";
@@ -290,11 +327,11 @@ at=false;
       sendTrigger.removeEventListener('click', onClickSend);
       messages.textContent += '== 退出しました ===\n';
       messages.textContent = null;
-      Array.from(remoteVideos.children).forEach(remoteVideo => {
-        remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-        remoteVideo.srcObject = null;
-        remoteVideo.remove();
-      });
+      // Array.from(remoteVideos.children).forEach(remoteVideo => {
+      //   remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+      //   remoteVideo.srcObject = null;
+      //   remoteVideo.remove();
+      // });
       location.href="top.html"
       clearUser();
     });
