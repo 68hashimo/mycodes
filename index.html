@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>videochat</title>
     <link rel="stylesheet" href="css/pr1.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/guestmain.css">
+    <link rel="stylesheet" href="css/guestcontent.css">
   </head>
   <body>
     <div class="container">
@@ -25,7 +26,8 @@
       <div class="room">
         <div class="box content">
           <div class="remote-streams" id="js-remote-streams"></div>
-            <div>
+            <div id = 'localVideo'>
+              <div id="strmyvideo"></div>
               <video id="js-local-stream"></video>
               <span id="js-room-mode"></span>
               <!--<input type="text" placeholder="Room Name" id="js-room-id">-->
@@ -68,10 +70,11 @@
               <button id="js-leave-trigger">退出</button>
               <button type="button" name="camera" id="camera-button" ><img src="img/camera.png"></button>
               <button type="button" name="micmute" id="mic-button"><img src="img/mic.png"></button>
-              <button type="button" id="notif" onclick="return notif()"><img src="img/good.png" width="30" height="30"></button>
-              <button type="button" id="notif" onclick="return notif2()"><img src="img/change.png" width="30" height="30"></button>
-              <button type="button" id="notif" onclick="return notif3()"><img src="img/mark.png" width="30" height="30"></button>
+              <button type="button" id="notif" onclick="return notif2()"><img src="img/change.png" width="50" height="50"></button>
+              <button type="button" id="notif" onclick="return notif3()"><img src="img/mark.png" width="50" height="50"></button>
               <button type="button" id="mojiokoshi" onclick="autotxtcookie()"><img src="img/moji.png"></button>
+              <button type="button" id="notif" onclick="return notif()"><img src="img/good.png" width="50" height="50"></button>
+              <button type="button" id="raisehand"><img src="img/kyosyu.png" width="50" height="50"></button>
             </div>
        </div>
       </div>

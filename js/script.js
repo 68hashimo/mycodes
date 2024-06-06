@@ -14,7 +14,10 @@ at=false;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
   const evc = document.getElementById('event');
-  const atxt = document.getElementById('atxt');
+  //const atxt = document.getElementById('atxt');
+  const roommoji = document.getElementById('menu_roommoji');
+  const mymoji=document.getElementById("menu_mymoji");
+  const strMyVideo = document.getElementById('strmyvideo');
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -126,9 +129,11 @@ at=false;
     if (audioTracks.length > 0 && audioTracks[0].enabled) {
       audioTracks.forEach(mtrack => mtrack.enabled = false);
       micImage.src = "img/muted.png";
+      f_mute()
     } else {
       audioTracks.forEach(mtrack => mtrack.enabled = true);
       micImage.src = "img/mic.png";
+      f_mute()
     }
   }
   
@@ -143,12 +148,17 @@ at=false;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
 
+
   // eslint-disable-next-line require-atomic-updates
   const peer = (window.peer = new Peer({
     key: 'f810ebbb-3b29-4ebc-ae3c-d58c967be2e3',
     debug: 3,
   }));
-
+  // var streamname;
+  // function tryGetNeme(str){
+  //   streamname=str;
+  //   console.log(streamname);
+  // }
   // Register join handler
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
@@ -165,43 +175,128 @@ at=false;
     
     var check_type=Object.prototype.toString;
 
-    const room = peer.joinRoom("roomId", {
+    const room = peer.joinRoom("roomId_2", {
       //roomId.valueが元値
       mode: getRoomModeByHash(),
       stream: localStream,
     });
+    try{
+      var uname=location.href.split("=")[1];
+      var decode_name=decodeURI(uname);
+      console.log(decode_name);
+    }catch(e){
+        var decode_name="no name";
+        console.log(e);
+    }
+    uname='hoge'+decode_name;
+    strMyVideo.innerHTML=decode_name;
+    strMyVideo.style.zIndex=10;
+    var notifyname = {pn:"username",msg:decode_name};
+    var joinname = {pn:"joinuser",msg:decode_name,prid:""};
 
-    room.once('open', () => {
+    //自分が参加したとき
+    room.once('open',async () => {
       messages.textContent += '=== 参加しました ===\n';
+      peer.listAllPeers((peers) => {
+        console.log(peers);
+        console.log('myid is '+peers[peers.length-1]);
+        joinname.prid=peers[peers.length-1]
+        joinuser(decode_name,peers[peers.length-1])
+      });
+      await room.send(notifyname);
     });
-    room.on('peerJoin', peerId => {
-      messages.textContent += `=== test ===\n`;
-      console.log("ピアIDは:"+peerId);
+    //他者が参加してきたとき
+    room.on('peerJoin',async peerId => {
+      messages.textContent += `=== 参加しました! ===\n`;
+      await console.log("ピアIDは:"+peerId);
+      // await pid(peerId);
+      // console.log(joinname);
+      joinname.prid=peerId
+      //room.send(joinname);
+      //room.send(notifyname);
     });
 
     // Render remote stream for new peer join in the room
     room.on('stream', async stream => {
+      const remoteStream = document.createElement('div');
+      remoteStream.setAttribute('streamId',stream.peerId);
       const newVideo = document.createElement('video');
       newVideo.srcObject = stream;
       newVideo.playsInline = true;
-      // mark peerId to find it later at peerLeave event
+      console.log(stream.peerId);
+      // mark peerId to find it later at peerLeave event 退出ユーザの識別
       newVideo.setAttribute('data-peer-id', stream.peerId);
-      remoteVideos.append(newVideo);
+      //ビデオ要素の上から要素を表示したい
+      const strName = document.createElement('div');
+      strName.setAttribute('userName',stream.peerId);
+      strName.innerHTML='username';
+      strName.style.zIndex=10;
+      remoteStream.append(strName);
+      remoteStream.append(newVideo);
+      //remoteVideos.append(newVideo);
+      remoteVideos.append(remoteStream);
       await newVideo.play().catch(console.error);
-      //var user = userm();
-      notify();
-      //if (user != 'customer'){notify();}
     });
 
-    room.on('data', ({ data, src }) => {
+    room.on('data', async ({ data, src }) => {
       // Show a message sent to the room and who sent　部屋に送られたメッセージと送信者を表示する
+      // var user={}
       if(typeof(data)=="object"){
-        console.log(data.msg);
-        atxt.innerHTML += '<div>'+ String(data.msg) +'</div>';
+        if(data.pn=='username'){
+          notify(0,data.msg+"がルームに参加しました");//通知をする
+          try{
+            //console.log("hog+"+data.msg);
+            peer.listAllPeers(async(peers) => {
+              //console.log(peers);
+              console.log(data.msg+'@id is '+peers[peers.length-1]);
+              await room.send(joinuser(data.msg,peers[peers.length-1]));
+              const userlst=joinuser(null,null).users;
+              await Object.keys(userlst).forEach(async(id) => {
+                console.log(id,userlst[id])
+                var addName= await remoteVideos.querySelector(`[userName="${id}"]`);
+                try{
+                  addName.innerHTML=await userlst[id];
+                }catch(e){
+                  console.log(e);
+                  console.log(`peerid:${id},username:${userlst[id]}`);
+                }
+               });
+            });
+          }catch(e){
+            console.log(e)
+          }
+          return
+        }else if(data.pn=="joinuser"){
+          var key=data.msg;//名前をキーにする
+          try{
+            console.log(data);
+            await updateUser(data);
+            const userlst=joinuser(null,null).users;
+            await Object.keys(userlst).forEach(async(id) => {
+              console.log(id,userlst[id])
+              var addName= await remoteVideos.querySelector(`[userName="${id}"]`);
+              try{
+                addName.innerHTML=await userlst[id];
+              }catch(e){
+                console.log(e);
+                console.log(`peerid:${id},username:${userlst[id]}`);
+              }
+             })
+          }catch(e){
+            console.log(e);
+          }
+          return
+        }else{
+        console.log(atxt);
+        roommoji.innerHTML += '<div>'+ String(data.msg) +'</div>';
         speechm(String(data.msg));
+        // let moji_container=document.getElementById("mojiokoshi_container");
+        // moji_container.scrollTo(0,moji_container.scrollHeight)
         return
       }
-      messages.textContent += `${"あいて"}: ${cut(data)}\n`;
+    }
+      var user = data.split(":");
+      messages.textContent += `${user[0]}: ${cut(user[1])}\n`;
       console.log(data);
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
@@ -212,24 +307,33 @@ at=false;
       const remoteVideo = remoteVideos.querySelector(
         `[data-peer-id="${peerId}"]`
       );
+      const userName = remoteVideos.querySelector(
+        `[userName="${peerId}"]`
+      );
+      //console.log(peerId);
       remoteVideo.srcObject.getTracks().forEach(track => track.stop());
       remoteVideo.srcObject = null;
       remoteVideo.remove();
-
+      userName.srcObject = null;
+      userName.remove();
+      removeUser(peerId);
       messages.textContent += `=== ${"2"}退出しました ===\n`;
       messages.textContent = null;
+      roommoji.innerHTML="ルームの文字起こし";
+      mymoji.innerHTML="あなたの文字起こし";
     });
     // for closing myself
     room.once('close', () => {
       sendTrigger.removeEventListener('click', onClickSend);
       messages.textContent += '== 退出しました ===\n';
       messages.textContent = null;
-      Array.from(remoteVideos.children).forEach(remoteVideo => {
-        remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-        remoteVideo.srcObject = null;
-        remoteVideo.remove();
-      });
+      // Array.from(remoteVideos.children).forEach(remoteVideo => {
+      //   remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+      //   remoteVideo.srcObject = null;
+      //   remoteVideo.remove();
+      // });
       location.href="top.html"
+      clearUser();
     });
 
     //--dataConnection-
@@ -245,7 +349,6 @@ at=false;
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
 
-
     function onClickSend() {
       // Send message to all of the peers in the room via websocket WebSocket経由でルーム内のすべてのピアにメッセージを送信する
       //ここif_12/14
@@ -253,8 +356,9 @@ at=false;
         alert("No input");
         return;
       }
-      room.send(localText.value);
-      messages.textContent += `${"あなた"}: ${cut(localText.value)}\n`;
+      var s_msg=userm()+":"+localText.value;/*`${userm()}:${localText.value}`;*/
+      room.send(s_msg);
+      messages.textContent += `${userm()}: ${cut(localText.value)}\n`;
       localText.value = '';
       let target = document.getElementById('js-messages');
       target.scrollTo(0,target.scrollHeight);
@@ -262,9 +366,78 @@ at=false;
 
     function clg(){
       var automsg=autotxtcookie();
-      var autotxt = {pn:"mojiokoshi",msg:automsg};
+      var autotxt = {pn:"mojiokoshi",msg:userm()+';'+automsg};
       room.send(autotxt)
     }
+
+
+    const raisehand = document.getElementById('raisehand');
+// 挙手ボタンイベント
+    raisehand.addEventListener('click', () => {
+      localText.value = '';
+      room.send({ pn: 'raisehand', msg: peer.id });
+      messages.textContent += '==対応に向かいます==\n';
+      let target = document.getElementById('js-messages');
+      target.scrollTo(0, target.scrollHeight);
+      console.log('挙手したユーザーのPeerID:', peer.id);
+    });
+
+    room.on('data', async ({ data, src }) => {
+      if (data.pn === 'raisehand') {
+        const targetpeerId = data.msg;
+        console.log('挙手したユーザーのPeerID:', targetpeerId);
+        //var cv = document.querySelectorAll('.content video');
+        document.querySelectorAll('.content video').forEach(video => {
+          video.style.visibility = 'hidden';
+        });
+
+        // 最初のCSSスタイル書き換え
+        /*cv.forEach(cv => {
+          cv.style.visibility = 'visible';
+        });*/
+        const targetVideo = remoteVideos.querySelector(`[data-peer-id="${targetpeerId}"]`);
+
+        if (targetVideo) {
+          targetVideo.style.visibility = 'visible';
+
+          // 他のユーザーのビデオトラックを無効にする
+          peer.listAllPeers((peers) => {
+            peers.forEach(peerId => {
+              if (peerId !== targetpeerId) {
+                const otherVideo = remoteVideos.querySelector(`[data-peer-id="${peerId}"]`);
+                if (otherVideo) {
+                  otherVideo.srcObject.getTracks().forEach(track => track.enabled = false);
+                }
+              }
+            });
+          });
+        }
+      }
+
+      if (data.pn === 'lowerhand') {
+        const targetpeerId = data.msg;
+        console.log('手を下げたユーザーのPeerID:', targetpeerId);
+        var cv = document.querySelectorAll('.content video');
+        // 最初のCSSスタイル書き換え
+        cv.forEach(cv => {
+          cv.style.visibility = 'hidden';
+        });
+
+        peer.listAllPeers((peers) => {
+          console.log(peers);
+          const mypeer = peer.id; // 自身のPeerIDを取得
+          peers.forEach(peerId => {
+            if (peerId !== targetpeerId && peerId !== mypeer) {
+              const remoteVideo = remoteVideos.querySelector(`[data-peer-id="${peerId}"]`);
+              if (remoteVideo) {
+                remoteVideo.srcObject.getTracks().forEach(track => track.enabled = true);
+              }
+              console.log(peerId);
+            }
+          });
+        });
+      }
+    });
 
   });
   peer.on('error', console.error);
